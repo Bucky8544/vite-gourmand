@@ -51,3 +51,5 @@ Les fichiers `.sql` du dossier `sql/` sont exécutés automatiquement à la prem
 - `main` : version stable
 - `develop` : intégration
 - `feature/*` : une branche par fonctionnalité
+## Gestion de projet
+Tableau Trello : https://trello.com/b/FCXtxHt2
