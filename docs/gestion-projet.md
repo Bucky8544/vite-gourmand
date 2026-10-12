@@ -23,9 +23,9 @@ Choix de l'outil : gratuit, visuel, lien partageable avec le jury, sans configur
 | 4 | Admin, qualité, déploiement, documentation | 12 h |
 
 ### Priorisation MoSCoW
-- Must : exigences explicites du sujet
-- Should : améliorations importantes
-- Could : bonus traités en fin de projet
+- Must : exigences explicites du sujet (ici : prioritaire)
+- Should : améliorations importantes (ici : secondaire)
+- Could : bonus traités en fin de projet (ici : optionnel)
 
 ### Définition de « terminé »
 Une carte passe en « Terminé » uniquement si :
