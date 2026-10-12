@@ -1,0 +1,44 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www/html
+    env_file: .env
+    depends_on:
+      - mysql
+      - mongo
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # les .sql de ce dossier sont exécutés à la 1re création de la base
+      - ./sql:/docker-entrypoint-initdb.d
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"   # interface web pour lire les mails
+      - "1025:1025"   # serveur SMTP de test
+
+volumes:
+  mysql_data:
+  mongo_data:
