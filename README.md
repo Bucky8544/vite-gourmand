@@ -51,8 +51,12 @@ Les fichiers `.sql` du dossier `sql/` sont exécutés automatiquement à la prem
 - `main` : version stable
 - `develop` : intégration
 - `feature/*` : une branche par fonctionnalité
+  
 ## Gestion de projet
 Tableau Trello : https://trello.com/b/FCXtxHt2
+
+## Lien vers les maquettes Figma
+Lien maquettes (lecture seule) : https://www.figma.com/design/wNQ1vRkypejmMimmiuI5sR/Vite-et-gourmnd?node-id=2-3&t=Ng1d2KTTmreLdWE2-1
 
 ## Initialiser MongoDB
 
