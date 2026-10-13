@@ -53,3 +53,11 @@ Les fichiers `.sql` du dossier `sql/` sont exécutés automatiquement à la prem
 - `feature/*` : une branche par fonctionnalité
 ## Gestion de projet
 Tableau Trello : https://trello.com/b/FCXtxHt2
+
+## Initialiser MongoDB
+
+Après le premier lancement (ou après `docker compose down -v`), créer les index :
+
+```bash
+docker compose exec web php scripts/init_mongo.php
+```
