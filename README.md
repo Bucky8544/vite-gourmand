@@ -90,6 +90,7 @@ et `SMTP_PASS` dans les variables d'environnement.
 docker compose exec web php scripts/test_mongo_stats.php
 docker compose exec web php scripts/test_inscription.php
 docker compose exec web php scripts/test_connexion.php
+docker compose exec web php scripts/test_reinitialisation.php
 ```
 
 ## Comptes de test (développement)

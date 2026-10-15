@@ -49,4 +49,43 @@ final class Mailer
 
         $this->send($email, $prenom, 'Bienvenue chez Vite & Gourmand', $html, $text);
     }
+
+    public function sendPasswordReset(string $email, ?string $prenom, string $url): void
+    {
+        $minutes = PasswordResetService::TTL_MINUTES;
+        $u = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+
+        $html = '<p>' . self::hello($prenom) . '</p>'
+            . '<p>Vous avez demandé à réinitialiser le mot de passe de votre compte Vite &amp; Gourmand.</p>'
+            . "<p><a href=\"$u\">Choisir un nouveau mot de passe</a></p>"
+            . "<p>Ce lien est valable $minutes minutes et ne peut être utilisé qu'une seule fois.</p>"
+            . "<p>Si vous n'êtes pas à l'origine de cette demande, ignorez ce message : votre mot de passe reste inchangé.</p>";
+        $text = self::helloText($prenom) . "\n\nVous avez demandé à réinitialiser le mot de passe de votre compte Vite & Gourmand.\n"
+            . "Choisissez un nouveau mot de passe : $url\n\n"
+            . "Ce lien est valable $minutes minutes et ne peut être utilisé qu'une seule fois.\n"
+            . "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message : votre mot de passe reste inchangé.";
+
+        $this->send($email, (string) $prenom, 'Réinitialisation de votre mot de passe', $html, $text);
+    }
+
+    public function sendPasswordChanged(string $email, ?string $prenom): void
+    {
+        $html = '<p>' . self::hello($prenom) . '</p>'
+            . '<p>Le mot de passe de votre compte Vite &amp; Gourmand vient d\'être modifié.</p>'
+            . "<p>Si vous n'êtes pas à l'origine de ce changement, contactez-nous sans attendre.</p>";
+        $text = self::helloText($prenom) . "\n\nLe mot de passe de votre compte Vite & Gourmand vient d'être modifié.\n"
+            . "Si vous n'êtes pas à l'origine de ce changement, contactez-nous sans attendre.";
+
+        $this->send($email, (string) $prenom, 'Votre mot de passe a été modifié', $html, $text);
+    }
+
+    private static function hello(?string $prenom): string
+    {
+        return $prenom !== null && $prenom !== '' ? 'Bonjour ' . htmlspecialchars($prenom, ENT_QUOTES, 'UTF-8') . ',' : 'Bonjour,';
+    }
+
+    private static function helloText(?string $prenom): string
+    {
+        return $prenom !== null && $prenom !== '' ? "Bonjour $prenom," : 'Bonjour,';
+    }
 }
