@@ -91,6 +91,7 @@ docker compose exec web php scripts/test_mongo_stats.php
 docker compose exec web php scripts/test_inscription.php
 docker compose exec web php scripts/test_connexion.php
 docker compose exec web php scripts/test_reinitialisation.php
+docker compose exec web php scripts/test_menus.php
 ```
 
 ## Comptes de test (développement)
@@ -102,3 +103,12 @@ docker compose exec web php scripts/test_reinitialisation.php
 | Utilisateur | `utilisateur@vite-gourmand.test` | `Client@Vite2026!` |
 
 Ces comptes sont créés par `sql/04_seed_users.sql`. Ils ne doivent pas exister en production.
+
+## API des menus
+
+`GET /api/menus` renvoie les menus actifs au format JSON (données publiques uniquement).
+
+Paramètres facultatifs : `prix_max`, `prix_de`, `prix_a`, `theme` (id), `regime` (id), `personnes`.
+Réponse : `{"count": n, "menus": [...]}`. En cas de paramètre invalide : code 422 et `{"errors": {...}}`.
+
+Exemple : `/api/menus?prix_max=100&regime=2`

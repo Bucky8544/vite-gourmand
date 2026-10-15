@@ -79,3 +79,24 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .alert-success { --bs-alert-color: #1D4A27; --bs-alert-bg: #E6F0E8; --bs-alert-border-color: var(--vg-succes); }
 .alert-info    { --bs-alert-color: var(--vg-encre); --bs-alert-bg: var(--vg-sable); --bs-alert-border-color: var(--vg-bordeaux); }
 .alert-danger  { --bs-alert-color: #7A1913; --bs-alert-bg: #FBE9E7; --bs-alert-border-color: var(--vg-erreur); }
+
+/* Champs de formulaire : bordure grise de la charte (contraste d'au moins 3:1) */
+.form-control, .form-select { border-color: var(--vg-gris); }
+.form-text { color: var(--vg-gris); }
+
+/* Panneau de filtres */
+.filtres { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 10px; overflow: hidden; }
+.filtres-titre { background: var(--vg-sable); color: var(--vg-encre); font-family: var(--vg-font-texte);
+                 font-size: 1.25rem; font-weight: 700; margin: 0; padding: 0.9rem 1.25rem; }
+.filtres-corps { padding: 1.25rem; }
+.filtres legend { float: none; width: auto; padding: 0; margin-bottom: 0.5rem; }
+
+/* Cartes de menu */
+.menu-card { --bs-card-bg: var(--vg-carte); --bs-card-border-color: #D8C7A3; --bs-card-border-radius: 12px; overflow: hidden; }
+.menu-card .card-img-top { aspect-ratio: 16 / 10; object-fit: cover; }
+.menu-desc { color: var(--vg-gris); }
+.menu-prix .prix { font-family: var(--vg-font-titre); font-size: 1.5rem; font-weight: 700; color: var(--vg-bordeaux); }
+
+.pastille { display: inline-block; background: var(--vg-sable); color: var(--vg-encre); border-radius: 999px;
+            padding: 0.15rem 0.75rem; font-size: 0.875rem; margin-right: 0.25rem; }
+.pastille-alerte { background: #FBE9E7; color: #7A1913; border: 1px solid var(--vg-erreur); }
