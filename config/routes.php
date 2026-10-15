@@ -17,7 +17,13 @@ return static function (Router $r): void {
     $r->get('/menus', [MenuController::class, 'index']);
     $r->get('/menus/{id}', [MenuController::class, 'show']);
     $r->get('/api/menus', [MenuController::class, 'api']);
+
     $r->get('/commande', [OrderController::class, 'create']);
+    $r->post('/commande/recapitulatif', [OrderController::class, 'recap']);
+    $r->post('/commande/modifier', [OrderController::class, 'modifier']);
+    $r->post('/commande', [OrderController::class, 'store']);
+    $r->get('/commande/confirmation/{numero}', [OrderController::class, 'confirmation']);
+    $r->get('/api/commande/prix', [OrderController::class, 'price']);
 
     $r->get('/inscription', [AuthController::class, 'showRegister']);
     $r->post('/inscription', [AuthController::class, 'register']);

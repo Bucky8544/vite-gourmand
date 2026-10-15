@@ -20,3 +20,6 @@ WORKDIR /var/www/html
 # Réécriture d'URL (.htaccess), pas de listing de dossiers, versions masquées
 COPY docker/php/apache.conf /etc/apache2/conf-available/app.conf
 RUN a2enconf app && echo "expose_php=Off" > /usr/local/etc/php/conf.d/security.ini
+
+# Fuseau horaire de l'application (dates de prestation, horodatage des commandes)
+RUN echo "date.timezone=Europe/Paris" > /usr/local/etc/php/conf.d/timezone.ini

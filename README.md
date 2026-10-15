@@ -93,6 +93,7 @@ docker compose exec web php scripts/test_connexion.php
 docker compose exec web php scripts/test_reinitialisation.php
 docker compose exec web php scripts/test_menus.php
 docker compose exec web php scripts/test_menu_detail.php
+docker compose exec web php scripts/test_commande.php
 ```
 
 ## Comptes de test (développement)
@@ -118,3 +119,15 @@ Exemple : `/api/menus?prix_max=100&regime=2`
 
 Le script `public/assets/js/menus.js` interroge `/api/menus` et met à jour la liste, le compteur et l'adresse
 de la page sans rechargement. Sans JavaScript, le formulaire fonctionne par rechargement de page.
+
+## Commande d'un menu
+
+Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis confirmation.
+
+- Prix calculé côté serveur en centimes : remise de 10 % dès « minimum + 5 » personnes, livraison offerte à Bordeaux,
+  5 € + 0,59 €/km ailleurs.
+- La distance est calculée avec les services publics de l'IGN (Géoplateforme : géocodage et itinéraire routier),
+  sans clé d'API. Variables facultatives : `SHOP_LON` et `SHOP_LAT` (point de départ, centre de Bordeaux par défaut).
+- Si l'itinéraire est indisponible, la distance à vol d'oiseau majorée de 30 % est utilisée et signalée.
+- Migrations SQL de cette fonctionnalité : `sql/02_schema_commande.sql` et `sql/05_seed_delais.sql`.
+  Sur une base existante : `docker compose exec -T mysql mysql -u vg_user -p vite_gourmand < sql/02_schema_commande.sql`.

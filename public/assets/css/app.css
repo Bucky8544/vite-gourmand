@@ -135,3 +135,11 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .plat:first-child { padding-top: 0; border-top: 0; }
 .plat-nom { display: block; font-weight: 700; }
 .plat-allergenes { display: block; color: var(--vg-gris); font-size: 0.9375rem; }
+
+/* ---------- Commande ---------- */
+.estimation { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.estimation-erreur { color: var(--vg-erreur); font-weight: 600; }
+
+.devis { --bs-table-bg: transparent; }
+.devis th { font-weight: 600; }
+.devis-total th, .devis-total td { font-size: 1.25rem; font-weight: 700; color: var(--vg-bordeaux); border-top: 2px solid var(--vg-bordeaux); }

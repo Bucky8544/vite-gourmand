@@ -42,7 +42,7 @@ final class MenuRepository
             $p['personnes'] = $f['personnes'];
         }
 
-        $sql = 'SELECT m.id, m.titre, m.description, m.nombre_personne_minimum, m.prix_minimum, m.stock,
+        $sql = 'SELECT m.id, m.titre, m.description, m.nombre_personne_minimum, m.prix_minimum, m.stock, m.delai_commande_jours,
                        t.libelle AS theme, r.libelle AS regime,
                        (SELECT mi.url FROM menu_image mi WHERE mi.menu_id = m.id ORDER BY mi.position, mi.id LIMIT 1) AS image_url,
                        (SELECT mi.texte_alternatif FROM menu_image mi WHERE mi.menu_id = m.id ORDER BY mi.position, mi.id LIMIT 1) AS image_alt
@@ -62,7 +62,7 @@ final class MenuRepository
     public function find(int $id): ?array
     {
         $stmt = Database::pdo()->prepare(
-            'SELECT m.id, m.titre, m.description, m.nombre_personne_minimum, m.prix_minimum, m.conditions, m.stock,
+            'SELECT m.id, m.titre, m.description, m.nombre_personne_minimum, m.prix_minimum, m.conditions, m.stock, m.delai_commande_jours,
                     t.libelle AS theme, r.libelle AS regime
              FROM menu m
              JOIN theme t ON t.id = m.theme_id
