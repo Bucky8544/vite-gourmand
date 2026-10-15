@@ -94,6 +94,7 @@ docker compose exec web php scripts/test_reinitialisation.php
 docker compose exec web php scripts/test_menus.php
 docker compose exec web php scripts/test_menu_detail.php
 docker compose exec web php scripts/test_commande.php
+docker compose exec web php scripts/test_espace.php
 ```
 
 ## Comptes de test (développement)
@@ -131,3 +132,11 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
 - Si l'itinéraire est indisponible, la distance à vol d'oiseau majorée de 30 % est utilisée et signalée.
 - Migrations SQL de cette fonctionnalité : `sql/02_schema_commande.sql` et `sql/05_seed_delais.sql`.
   Sur une base existante : `docker compose exec -T mysql mysql -u vg_user -p vite_gourmand < sql/02_schema_commande.sql`.
+
+## Espace utilisateur
+
+- `/mon-espace` : informations personnelles et liste des commandes.
+- Une commande peut être modifiée (sauf le menu) ou annulée tant qu'elle est « en attente » ; le statut est vérifié
+  dans une transaction avec verrou. L'annulation rend l'unité de stock au menu.
+- Le suivi des statuts (avec date et heure) apparaît une fois la commande acceptée.
+- Un avis (note de 1 à 5 et commentaire) peut être donné une fois la commande terminée ; il est publié après validation.

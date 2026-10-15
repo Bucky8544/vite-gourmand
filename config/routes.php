@@ -8,6 +8,7 @@ use App\Controller\MenuController;
 use App\Controller\OrderController;
 use App\Controller\PasswordController;
 use App\Controller\SpaceController;
+use App\Controller\UserSpaceController;
 use App\Core\Router;
 
 return static function (Router $r): void {
@@ -36,7 +37,19 @@ return static function (Router $r): void {
     $r->get('/reinitialisation/{token}', [PasswordController::class, 'showReset']);
     $r->post('/reinitialisation/{token}', [PasswordController::class, 'reset']);
 
-    $r->get('/mon-espace', [SpaceController::class, 'utilisateur']);
+    // Espace utilisateur
+    $r->get('/mon-espace', [UserSpaceController::class, 'index']);
+    $r->get('/mon-espace/profil', [UserSpaceController::class, 'profil']);
+    $r->post('/mon-espace/profil', [UserSpaceController::class, 'profilEnregistrer']);
+    $r->get('/mon-espace/commandes/{numero}', [UserSpaceController::class, 'show']);
+    $r->get('/mon-espace/commandes/{numero}/modifier', [UserSpaceController::class, 'modifierForm']);
+    $r->post('/mon-espace/commandes/{numero}/modifier', [UserSpaceController::class, 'modifierRecap']);
+    $r->post('/mon-espace/commandes/{numero}/modifier/retour', [UserSpaceController::class, 'modifierRetour']);
+    $r->post('/mon-espace/commandes/{numero}/modifier/confirmer', [UserSpaceController::class, 'modifierConfirmer']);
+    $r->get('/mon-espace/commandes/{numero}/annuler', [UserSpaceController::class, 'annulerForm']);
+    $r->post('/mon-espace/commandes/{numero}/annuler', [UserSpaceController::class, 'annuler']);
+    $r->post('/mon-espace/commandes/{numero}/avis', [UserSpaceController::class, 'avis']);
+
     $r->get('/employe', [SpaceController::class, 'employe']);
     $r->get('/admin', [SpaceController::class, 'admin']);
 };

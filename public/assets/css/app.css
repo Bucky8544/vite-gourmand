@@ -143,3 +143,23 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .devis { --bs-table-bg: transparent; }
 .devis th { font-weight: 600; }
 .devis-total th, .devis-total td { font-size: 1.25rem; font-weight: 700; color: var(--vg-bordeaux); border-top: 2px solid var(--vg-bordeaux); }
+
+/* ---------- Espace utilisateur ---------- */
+.carte-espace { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.carte-espace dt { font-size: 0.875rem; color: var(--vg-gris); font-weight: 600; }
+.carte-espace dd { margin-bottom: 0.75rem; }
+
+/* Statuts : toujours écrits en toutes lettres, la couleur n'est qu'un renfort */
+.statut { display: inline-block; padding: 0.15rem 0.75rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; border: 1px solid transparent; }
+.statut-en_attente { background: var(--vg-sable); color: var(--vg-encre); border-color: #C9B27F; }
+.statut-accepte, .statut-en_preparation, .statut-en_cours_livraison, .statut-livre { background: #E6F0E8; color: #1D4A27; border-color: var(--vg-succes); }
+.statut-attente_retour_materiel { background: #FFF3D6; color: #6B4400; border-color: var(--vg-or-fonce); }
+.statut-terminee { background: var(--vg-bordeaux); color: #fff; }
+.statut-annulee { background: #FBE9E7; color: #7A1913; border-color: var(--vg-erreur); }
+
+/* Suivi de commande */
+.suivi { margin: 0 0 1rem; padding: 0; }
+.suivi li { position: relative; display: flex; flex-wrap: wrap; gap: 0.15rem 1rem; padding: 0.6rem 0 0.6rem 1.5rem; border-left: 3px solid var(--vg-sable); }
+.suivi li::before { content: ""; position: absolute; left: -9px; top: 0.95rem; width: 15px; height: 15px; border-radius: 50%; background: var(--vg-bordeaux); }
+.suivi-statut { font-weight: 700; }
+.suivi time { color: var(--vg-gris); }

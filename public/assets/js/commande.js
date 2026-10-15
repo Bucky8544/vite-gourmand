@@ -33,7 +33,7 @@
     return d.getFullYear() + '-' + m + '-' + j;
   }
 
-  function optionChoisie() { return menu.options[menu.selectedIndex]; }
+  function optionChoisie() { return menu.options ? menu.options[menu.selectedIndex] : null; } // champ caché : pas d'options
 
   function majContraintes() {
     const option = optionChoisie();
