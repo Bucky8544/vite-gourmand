@@ -58,6 +58,70 @@ final class MenuRepository
         return $stmt->fetchAll();
     }
 
+    /** Menu actif avec toutes ses informations, ou null (inconnu ou désactivé). */
+    public function find(int $id): ?array
+    {
+        $stmt = Database::pdo()->prepare(
+            'SELECT m.id, m.titre, m.description, m.nombre_personne_minimum, m.prix_minimum, m.conditions, m.stock,
+                    t.libelle AS theme, r.libelle AS regime
+             FROM menu m
+             JOIN theme t ON t.id = m.theme_id
+             JOIN regime r ON r.id = m.regime_id
+             WHERE m.id = :id AND m.actif = 1'
+        );
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch() ?: null;
+    }
+
+    /** @return list<array{url:string,texte_alternatif:string,position:int|string}> */
+    public function images(int $menuId): array
+    {
+        $stmt = Database::pdo()->prepare(
+            'SELECT url, texte_alternatif, position FROM menu_image WHERE menu_id = :id ORDER BY position, id'
+        );
+        $stmt->execute(['id' => $menuId]);
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Plats du menu regroupés par type, chacun avec la liste de ses allergènes.
+     *
+     * @return array{entree: list<array>, plat: list<array>, dessert: list<array>}
+     */
+    public function composition(int $menuId): array
+    {
+        $stmt = Database::pdo()->prepare(
+            "SELECT p.id, p.titre, p.type, a.libelle AS allergene
+             FROM menu_plat mp
+             JOIN plat p ON p.id = mp.plat_id
+             LEFT JOIN plat_allergene pa ON pa.plat_id = p.id
+             LEFT JOIN allergene a ON a.id = pa.allergene_id
+             WHERE mp.menu_id = :id
+             ORDER BY FIELD(p.type, 'entree', 'plat', 'dessert'), p.id, a.id"
+        );
+        $stmt->execute(['id' => $menuId]);
+
+        $plats = [];
+        foreach ($stmt->fetchAll() as $ligne) {
+            $pid = (int) $ligne['id'];
+            if (!isset($plats[$pid])) {
+                $plats[$pid] = ['id' => $pid, 'titre' => $ligne['titre'], 'type' => $ligne['type'], 'allergenes' => []];
+            }
+            if ($ligne['allergene'] !== null) {
+                $plats[$pid]['allergenes'][] = $ligne['allergene'];
+            }
+        }
+
+        $groupes = ['entree' => [], 'plat' => [], 'dessert' => []];
+        foreach ($plats as $plat) {
+            $groupes[$plat['type']][] = $plat;
+        }
+
+        return $groupes;
+    }
+
     /** @return list<array{id:int|string,libelle:string}> */
     public function themes(): array
     {

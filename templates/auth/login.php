@@ -26,6 +26,7 @@
         </form>
 
         <p class="mt-4 mb-1"><a href="/mot-de-passe-oublie">Mot de passe oublié ?</a></p>
-        <p>Pas encore de compte ? <a href="/inscription">Créer un compte</a></p>
+        <p>Pas encore de compte ?
+            <a href="/inscription<?= !empty($redirect) ? '?redirect=' . $this->e(rawurlencode($redirect)) : '' ?>">Créer un compte</a></p>
     </div>
 </div>

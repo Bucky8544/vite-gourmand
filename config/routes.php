@@ -5,6 +5,7 @@ use App\Controller\AuthController;
 use App\Controller\HealthController;
 use App\Controller\HomeController;
 use App\Controller\MenuController;
+use App\Controller\OrderController;
 use App\Controller\PasswordController;
 use App\Controller\SpaceController;
 use App\Core\Router;
@@ -14,7 +15,9 @@ return static function (Router $r): void {
     $r->get('/sante', [HealthController::class, 'index']);
 
     $r->get('/menus', [MenuController::class, 'index']);
+    $r->get('/menus/{id}', [MenuController::class, 'show']);
     $r->get('/api/menus', [MenuController::class, 'api']);
+    $r->get('/commande', [OrderController::class, 'create']);
 
     $r->get('/inscription', [AuthController::class, 'showRegister']);
     $r->post('/inscription', [AuthController::class, 'register']);

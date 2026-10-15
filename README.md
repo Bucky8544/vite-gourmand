@@ -92,6 +92,7 @@ docker compose exec web php scripts/test_inscription.php
 docker compose exec web php scripts/test_connexion.php
 docker compose exec web php scripts/test_reinitialisation.php
 docker compose exec web php scripts/test_menus.php
+docker compose exec web php scripts/test_menu_detail.php
 ```
 
 ## Comptes de test (développement)

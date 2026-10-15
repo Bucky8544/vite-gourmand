@@ -65,8 +65,10 @@ final class Auth
 
         if ($user === null) {
             Session::flash('info', 'Veuillez vous connecter pour accéder à cette page.');
-            $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
-            Http::redirect('/connexion?redirect=' . rawurlencode($path));
+            // On garde la page demandée avec ses paramètres (par exemple /commande?menu=3)
+            $cible = $_SERVER['REQUEST_URI'] ?? '/';
+            $suite = (strlen($cible) <= 500 && Http::isSafePath($cible)) ? '?redirect=' . rawurlencode($cible) : '';
+            Http::redirect('/connexion' . $suite);
         }
 
         if (!in_array($user['role'], $roles, true)) {

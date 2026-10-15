@@ -104,3 +104,34 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 /* Mise à jour des menus en cours */
 #zone-resultats.chargement { opacity: 0.6; transition: opacity 0.15s; }
 @media (prefers-reduced-motion: reduce) { #zone-resultats.chargement { transition: none; } }
+
+/* ---------- Vue détaillée d'un menu ---------- */
+.breadcrumb { --bs-breadcrumb-divider-color: var(--vg-gris); --bs-breadcrumb-item-active-color: var(--vg-gris); }
+
+.galerie-principale img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: 14px; }
+.galerie-vignettes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; padding: 0; margin: 0.75rem 0 0; }
+.vignette { display: block; border-radius: 10px; }
+.vignette img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover;
+                border-radius: 10px; border: 3px solid transparent; }
+.vignette[aria-current="true"] img { border-color: var(--vg-bordeaux); }
+
+.menu-prix-detail .prix { font-size: 2.25rem; }
+.remise-info { color: var(--vg-gris); }
+.stock { font-weight: 600; }
+.stock-point { display: inline-block; width: 0.65rem; height: 0.65rem; border-radius: 50%;
+               background: var(--vg-succes); margin-right: 0.4rem; }
+
+/* Conditions du menu : doivent rester bien visibles (exigence du sujet) */
+.conditions { background: var(--vg-sable); border: 3px solid var(--vg-bordeaux); border-radius: 12px; padding: 1.25rem 1.5rem; }
+.conditions-titre { display: flex; align-items: center; gap: 0.75rem; margin: 0; color: var(--vg-encre);
+                    font-family: var(--vg-font-texte); font-size: 1.25rem; font-weight: 700; }
+.conditions-icone { display: inline-flex; align-items: center; justify-content: center; flex: none;
+                    width: 2rem; height: 2rem; border-radius: 50%; background: var(--vg-bordeaux); color: #fff; font-weight: 700; }
+.conditions p { margin: 0.75rem 0 0; white-space: pre-line; }
+
+.composition-carte { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.composition-carte h3 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #D8C7A3; }
+.plat { padding: 0.75rem 0; border-top: 1px solid #D8C7A3; }
+.plat:first-child { padding-top: 0; border-top: 0; }
+.plat-nom { display: block; font-weight: 700; }
+.plat-allergenes { display: block; color: var(--vg-gris); font-size: 0.9375rem; }

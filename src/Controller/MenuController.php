@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Core\Auth;
+use App\Core\Http;
 use App\Core\View;
 use App\Repository\MenuRepository;
 use App\Validation\MenuFilter;
@@ -31,6 +33,43 @@ final class MenuController
             'filters' => $parsed['filters'],
             'errors' => $parsed['errors'],
             'old' => $old,
+        ]);
+    }
+
+    /** Vue détaillée : visible par les visiteurs comme par les comptes connectés. */
+    public function show(string $id): void
+    {
+        if (!preg_match('/^[1-9]\d{0,9}$/', $id)) {
+            Http::notFound();
+        }
+
+        $repo = new MenuRepository();
+        $menu = $repo->find((int) $id);
+        if ($menu === null) {
+            Http::notFound();
+        }
+
+        $composition = $repo->composition((int) $id);
+        $allergenes = [];
+        foreach ($composition as $plats) {
+            foreach ($plats as $plat) {
+                foreach ($plat['allergenes'] as $allergene) {
+                    $allergenes[$allergene] = true;
+                }
+            }
+        }
+
+        $user = Auth::user();
+
+        View::render('menus/show', [
+            'title' => $menu['titre'],
+            'current' => '/menus',
+            'menu' => $menu,
+            'images' => $repo->images((int) $id),
+            'composition' => $composition,
+            'allergenes' => array_keys($allergenes),
+            'user' => $user,
+            'peutCommander' => $user === null || $user['role'] === 'utilisateur',
         ]);
     }
 

@@ -19,6 +19,14 @@ final class AuthController
     // ---------- Inscription ----------
     public function showRegister(): void
     {
+        // Un visiteur qui vient de la page de commande garde sa destination pendant l'inscription
+        $suite = $this->redirectParam($_GET['redirect'] ?? null);
+        if ($suite !== null) {
+            Session::set('redirect_apres_inscription', $suite);
+        } else {
+            Session::forget('redirect_apres_inscription');
+        }
+
         View::render('auth/register', ['title' => 'Créer un compte', 'errors' => [], 'old' => []]);
     }
 
@@ -54,7 +62,10 @@ final class AuthController
         Session::flash('success', $mailOk
             ? 'Votre compte a été créé. Un e-mail de bienvenue vous a été envoyé. Vous pouvez vous connecter.'
             : "Votre compte a été créé. Le e-mail de bienvenue n'a pas pu être envoyé. Vous pouvez vous connecter.");
-        Http::redirect('/connexion');
+
+        $suite = $this->redirectParam(Session::get('redirect_apres_inscription'));
+        Session::forget('redirect_apres_inscription');
+        Http::redirect('/connexion' . ($suite !== null ? '?redirect=' . rawurlencode($suite) : ''));
     }
 
     private function refuseRegister(array $errors, array $old): void
@@ -110,6 +121,6 @@ final class AuthController
 
     private function redirectParam(mixed $value): ?string
     {
-        return is_string($value) && Http::isSafePath($value) ? $value : null;
+        return is_string($value) && strlen($value) <= 500 && Http::isSafePath($value) ? $value : null;
     }
 }

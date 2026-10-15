@@ -23,4 +23,11 @@ final class Http
         header('Location: ' . $path, true, 303);
         exit;
     }
+
+    public static function notFound(): never
+    {
+        http_response_code(404);
+        View::render('errors/404', ['title' => 'Page introuvable']);
+        exit;
+    }
 }
