@@ -77,3 +77,16 @@ docker compose exec web php scripts/init_mongo.php
 - `docs/` : documentation et livrables
 
 Vérifier que l'application et les deux bases répondent : http://localhost:8081/sante
+
+## Mails en développement
+
+Tous les mails envoyés par l'application sont capturés par Mailpit : http://localhost:8025
+(aucun mail réel n'est envoyé). En production, renseigner `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`
+et `SMTP_PASS` dans les variables d'environnement.
+
+## Tests
+
+```bash
+docker compose exec web php scripts/test_mongo_stats.php
+docker compose exec web php scripts/test_inscription.php
+```

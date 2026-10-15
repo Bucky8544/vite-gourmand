@@ -56,3 +56,7 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .site-footer a { color: var(--vg-creme); }
 .footer-brand { font-family: var(--vg-font-titre); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
 .footer-title { font-family: var(--vg-font-texte); font-size: 1.1rem; font-weight: 700; color: var(--vg-creme); }
+
+.regles li { color: var(--vg-gris); }
+.regles li.ok { color: var(--vg-succes); font-weight: 600; }
+.regles .etat { display: inline-block; width: 1.2em; }
