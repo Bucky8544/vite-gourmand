@@ -16,3 +16,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+# Réécriture d'URL (.htaccess), pas de listing de dossiers, versions masquées
+COPY docker/php/apache.conf /etc/apache2/conf-available/app.conf
+RUN a2enconf app && echo "expose_php=Off" > /usr/local/etc/php/conf.d/security.ini

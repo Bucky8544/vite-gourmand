@@ -1,0 +1,58 @@
+:root {
+  --vg-bordeaux: #742431;
+  --vg-bordeaux-fonce: #5A1B26;
+  --vg-creme: #FAF4E6;
+  --vg-carte: #FCF9F2;
+  --vg-blanc: #FFFFFF;
+  --vg-sable: #E5CEA5;
+  --vg-encre: #2E2110;
+  --vg-gris: #5C5148;
+  --vg-or: #EAA830;
+  --vg-or-fonce: #8A5A00;
+  --vg-succes: #2F6B3A;
+  --vg-erreur: #B3261E;
+
+  --vg-font-titre: "Playfair Display", Georgia, serif;
+  --vg-font-texte: "Inter", system-ui, sans-serif;
+
+  --bs-body-bg: var(--vg-creme);
+  --bs-body-color: var(--vg-encre);
+  --bs-body-font-family: var(--vg-font-texte);
+  --bs-link-color: var(--vg-bordeaux);
+  --bs-link-hover-color: var(--vg-bordeaux-fonce);
+}
+
+body { line-height: 1.6; }
+
+h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
+
+:focus-visible { outline: 3px solid var(--vg-bordeaux); outline-offset: 2px; }
+
+.skip-link {
+  position: absolute; left: 0.5rem; top: -4rem; z-index: 1000;
+  background: var(--vg-bordeaux); color: #fff; padding: 0.5rem 1rem; border-radius: 0 0 8px 8px;
+}
+.skip-link:focus { top: 0; color: #fff; }
+
+.btn-primary {
+  --bs-btn-bg: var(--vg-bordeaux);
+  --bs-btn-border-color: var(--vg-bordeaux);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-hover-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-active-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-border-radius: 8px;
+  font-weight: 600;
+}
+
+.site-header { background: var(--vg-creme); border-bottom: 1px solid var(--vg-sable); }
+.navbar-brand { font-family: var(--vg-font-titre); font-weight: 700; color: var(--vg-bordeaux); line-height: 1.1; }
+.navbar .nav-link { color: var(--vg-encre); }
+.navbar .nav-link.active { font-weight: 700; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; text-decoration-color: var(--vg-bordeaux); }
+
+.site-footer { background: var(--vg-bordeaux-fonce); color: var(--vg-creme); margin-top: 4rem; }
+.site-footer a { color: var(--vg-creme); }
+.footer-brand { font-family: var(--vg-font-titre); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.footer-title { font-family: var(--vg-font-texte); font-size: 1.1rem; font-weight: 700; color: var(--vg-creme); }

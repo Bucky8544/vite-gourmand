@@ -65,3 +65,15 @@ Après le premier lancement (ou après `docker compose down -v`), créer les ind
 ```bash
 docker compose exec web php scripts/init_mongo.php
 ```
+
+## Structure du projet
+
+- `public/` : seul dossier exposé par Apache (point d'entrée `index.php`, assets)
+- `src/Core/` : routeur, connexion PDO, sessions, protection CSRF, vues
+- `src/Controller/` : contrôleurs
+- `templates/` : vues PHP
+- `config/routes.php` : déclaration des routes
+- `sql/` : schéma et données de test
+- `docs/` : documentation et livrables
+
+Vérifier que l'application et les deux bases répondent : http://localhost:8081/sante
