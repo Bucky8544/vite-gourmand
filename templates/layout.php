@@ -1,6 +1,8 @@
 <?php
 $nav = [['/', 'Accueil'], ['/menus', 'Nos menus'], ['/contact', 'Contact']];
 $current = $current ?? '';
+$user = \App\Core\Auth::user();
+$home = $user ? \App\Core\Auth::home($user) : '';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,7 +33,20 @@ $current = $current ?? '';
                                href="<?= $this->e($href) ?>"<?= $current === $href ? ' aria-current="page"' : '' ?>><?= $this->e($label) ?></a>
                         </li>
                     <?php endforeach; ?>
-                    <li class="nav-item"><a class="btn btn-primary" href="/connexion">Connexion</a></li>
+                    <?php if ($user): ?>
+                        <li class="nav-item">
+                            <a class="nav-link<?= $current === $home ? ' active' : '' ?>" href="<?= $this->e($home) ?>"
+                               <?= $current === $home ? 'aria-current="page"' : '' ?>>Mon espace</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="/deconnexion" class="d-inline">
+                                <?= \App\Core\Csrf::field() ?>
+                                <button type="submit" class="btn btn-outline-primary">Déconnexion</button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="btn btn-primary" href="/connexion">Connexion</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

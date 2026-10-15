@@ -89,4 +89,15 @@ et `SMTP_PASS` dans les variables d'environnement.
 ```bash
 docker compose exec web php scripts/test_mongo_stats.php
 docker compose exec web php scripts/test_inscription.php
+docker compose exec web php scripts/test_connexion.php
 ```
+
+## Comptes de test (développement)
+
+| Rôle | Identifiant | Mot de passe |
+|---|---|---|
+| Administrateur | `admin@vite-gourmand.test` | `Admin@Vite2026!` |
+| Employé | `employe@vite-gourmand.test` | `Employe@Vite2026!` |
+| Utilisateur | `utilisateur@vite-gourmand.test` | `Client@Vite2026!` |
+
+Ces comptes sont créés par `sql/04_seed_users.sql`. Ils ne doivent pas exister en production.

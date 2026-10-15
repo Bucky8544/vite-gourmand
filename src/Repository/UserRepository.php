@@ -7,6 +7,39 @@ use App\Core\Database;
 
 final class UserRepository
 {
+    private const SELECT = 'SELECT u.id, u.email, u.mot_de_passe, u.nom, u.prenom, u.actif, r.libelle AS role
+                            FROM utilisateur u
+                            JOIN role r ON r.id = u.role_id';
+
+    public function findByEmail(string $email): ?array
+    {
+        $stmt = Database::pdo()->prepare(self::SELECT . ' WHERE u.email = :email');
+        $stmt->execute(['email' => $email]);
+
+        return $stmt->fetch() ?: null;
+    }
+
+    /** Compte actif uniquement, sans le hash du mot de passe. */
+    public function findActiveById(int $id): ?array
+    {
+        $stmt = Database::pdo()->prepare(self::SELECT . ' WHERE u.id = :id AND u.actif = 1');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+        unset($row['mot_de_passe']);
+
+        return $row;
+    }
+
+    public function updatePasswordHash(int $id, string $hash): void
+    {
+        Database::pdo()
+            ->prepare('UPDATE utilisateur SET mot_de_passe = :hash WHERE id = :id')
+            ->execute(['hash' => $hash, 'id' => $id]);
+    }
+
     /** Crée un compte avec le rôle « utilisateur ». Lève une PDOException si l'e-mail existe déjà. */
     public function createUser(array $d, string $hash): int
     {

@@ -60,3 +60,22 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .regles li { color: var(--vg-gris); }
 .regles li.ok { color: var(--vg-succes); font-weight: 600; }
 .regles .etat { display: inline-block; width: 1.2em; }
+
+.btn-outline-primary {
+  --bs-btn-color: var(--vg-bordeaux);
+  --bs-btn-border-color: var(--vg-bordeaux);
+  --bs-btn-hover-bg: var(--vg-bordeaux);
+  --bs-btn-hover-border-color: var(--vg-bordeaux);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-active-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-active-color: #fff;
+  --bs-btn-border-radius: 8px;
+  --bs-btn-border-width: 2px;
+  font-weight: 600;
+}
+
+/* Messages : couleurs de la charte, contrastes vérifiés (au moins 4,5:1) */
+.alert-success { --bs-alert-color: #1D4A27; --bs-alert-bg: #E6F0E8; --bs-alert-border-color: var(--vg-succes); }
+.alert-info    { --bs-alert-color: var(--vg-encre); --bs-alert-bg: var(--vg-sable); --bs-alert-border-color: var(--vg-bordeaux); }
+.alert-danger  { --bs-alert-color: #7A1913; --bs-alert-bg: #FBE9E7; --bs-alert-border-color: var(--vg-erreur); }
