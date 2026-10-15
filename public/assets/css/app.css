@@ -100,3 +100,7 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .pastille { display: inline-block; background: var(--vg-sable); color: var(--vg-encre); border-radius: 999px;
             padding: 0.15rem 0.75rem; font-size: 0.875rem; margin-right: 0.25rem; }
 .pastille-alerte { background: #FBE9E7; color: #7A1913; border: 1px solid var(--vg-erreur); }
+
+/* Mise à jour des menus en cours */
+#zone-resultats.chargement { opacity: 0.6; transition: opacity 0.15s; }
+@media (prefers-reduced-motion: reduce) { #zone-resultats.chargement { transition: none; } }

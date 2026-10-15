@@ -36,27 +36,27 @@ $liste = function (string $name, string $label, array $options, string $tous) us
     <h1>Nos menus</h1>
     <p class="lead">Des menus pour Noël, Pâques et tous vos événements. Filtrez pour trouver le vôtre.</p>
 
-    <?php if ($errors): ?>
-        <div class="alert alert-danger" role="alert">
-            <p class="fw-bold mb-2">Certains filtres n'ont pas été appliqués :</p>
-            <ul class="mb-0">
-                <?php foreach ($errors as $champ => $message): ?>
-                    <li><a href="#<?= $this->e($champ) ?>"><?= $this->e($message) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <div id="erreurs-filtres">
+        <?php if ($errors): ?>
+            <div class="alert alert-danger" role="alert">
+                <p class="fw-bold mb-2">Certains filtres n'ont pas été appliqués :</p>
+                <ul class="mb-0">
+                    <?php foreach ($errors as $champ => $message): ?>
+                        <li><a href="#<?= $this->e($champ) ?>"><?= $this->e($message) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <div class="row g-4">
         <div class="col-lg-3">
-            <button class="btn btn-outline-primary w-100 d-lg-none mb-3" type="button" data-bs-toggle="collapse"
+            <button id="bouton-filtres" class="btn btn-outline-primary w-100 d-lg-none mb-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#panneau-filtres" aria-controls="panneau-filtres"
-                    aria-expanded="<?= $panneauOuvert ? 'true' : 'false' ?>">
-                Filtrer les menus<?= $nbActifs > 0 ? ' (' . $nbActifs . ')' : '' ?>
-            </button>
+                    aria-expanded="<?= $panneauOuvert ? 'true' : 'false' ?>"><?= 'Filtrer les menus' . ($nbActifs > 0 ? ' (' . $nbActifs . ')' : '') ?></button>
 
             <div class="collapse d-lg-block<?= $panneauOuvert ? ' show' : '' ?>" id="panneau-filtres">
-                <form method="get" action="/menus" class="filtres" id="filtres" aria-labelledby="titre-filtres">
+                <form method="get" action="/menus" class="filtres" id="filtres" novalidate aria-labelledby="titre-filtres">
                     <h2 id="titre-filtres" class="filtres-titre">Filtrer les menus</h2>
                     <div class="filtres-corps">
                         <?php $nombre('prix_max', 'Prix maximum (€)', '0', 'any', ' fw-bold'); ?>
@@ -84,9 +84,11 @@ $liste = function (string $name, string $label, array $options, string $tous) us
                             <?php endif; ?>
                         </div>
 
+                        <p id="aide-filtres" class="form-text d-none">Les résultats se mettent à jour automatiquement quand vous modifiez un filtre.</p>
+
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Appliquer les filtres</button>
-                            <a class="btn btn-outline-primary" href="/menus">Réinitialiser</a>
+                            <a class="btn btn-outline-primary" href="/menus" data-reinitialiser>Réinitialiser</a>
                         </div>
                     </div>
                 </form>
@@ -99,7 +101,7 @@ $liste = function (string $name, string $label, array $options, string $tous) us
 
             <div id="zone-resultats">
                 <?php if ($n === 0): ?>
-                    <p>Aucun menu ne correspond à vos critères. <a href="/menus">Réinitialiser les filtres</a></p>
+                    <p>Aucun menu ne correspond à vos critères. <a href="/menus" data-reinitialiser>Réinitialiser les filtres</a></p>
                 <?php else: ?>
                     <ul id="liste-menus" class="row g-4 list-unstyled p-0 m-0">
                         <?php foreach ($menus as $menu): ?>
@@ -111,3 +113,4 @@ $liste = function (string $name, string $label, array $options, string $tous) us
         </section>
     </div>
 </div>
+<script src="/assets/js/menus.js" defer></script>

@@ -112,3 +112,8 @@ Paramètres facultatifs : `prix_max`, `prix_de`, `prix_a`, `theme` (id), `regime
 Réponse : `{"count": n, "menus": [...]}`. En cas de paramètre invalide : code 422 et `{"errors": {...}}`.
 
 Exemple : `/api/menus?prix_max=100&regime=2`
+
+## Filtres dynamiques (page des menus)
+
+Le script `public/assets/js/menus.js` interroge `/api/menus` et met à jour la liste, le compteur et l'adresse
+de la page sans rechargement. Sans JavaScript, le formulaire fonctionne par rechargement de page.
