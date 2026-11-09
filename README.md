@@ -97,6 +97,7 @@ docker compose exec web php scripts/test_commande.php
 docker compose exec web php scripts/test_espace.php
 docker compose exec web php scripts/test_employe.php
 docker compose exec web php scripts/test_avis.php
+docker compose exec web php scripts/test_catalogue.php
 ```
 
 ## Comptes de test (développement)
@@ -159,3 +160,11 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
 - La page d'accueil affiche les 6 avis validés les plus récents, signés du prénom et de l'initiale du nom.
 - Données de démonstration (`sql/07_seed_avis.sql`) : 3 commandes terminées et 3 avis (2 validés, 1 en attente) ;
   les deux clients ajoutés sont inactifs et ne servent qu'à signer ces avis.
+
+## Espace employé : catalogue
+
+- `/employe/menus` : créer, modifier, désactiver (réversible) ou supprimer (si jamais commandé) un menu, avec sa composition,
+  son stock, son délai de commande et sa galerie d'images (JPEG, PNG ou WebP, 2 Mo maximum, texte alternatif obligatoire).
+- `/employe/plats` : plats par type avec leurs allergènes ; un plat utilisé par un menu ne peut pas être supprimé.
+- `/employe/categories` : thèmes et régimes. `/employe/horaires` : horaires affichés dans le pied de page et appliqués à la livraison.
+- Les images téléversées sont stockées dans un volume Docker (`uploads`), hors du dépôt Git.

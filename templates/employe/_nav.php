@@ -1,11 +1,21 @@
-<?php /* Navigation de l'espace employé : $actif ('commandes' ou 'avis'), $avisEnAttente */ ?>
+<?php
+/* Navigation de l'espace employé. $actif : commandes, avis, menus, plats, categories ou horaires. $avisEnAttente est facultatif. */
+$enAttente = $avisEnAttente ?? ((new \App\Repository\ReviewRepository())->countByStatus()['en_attente'] ?? 0);
+$onglets = [
+    'commandes' => ['/employe', 'Commandes'],
+    'avis' => ['/employe/avis', 'Avis clients' . ((int) $enAttente > 0 ? ' (' . (int) $enAttente . ' en attente)' : '')],
+    'menus' => ['/employe/menus', 'Menus'],
+    'plats' => ['/employe/plats', 'Plats'],
+    'categories' => ['/employe/categories', 'Thèmes et régimes'],
+    'horaires' => ['/employe/horaires', 'Horaires'],
+];
+?>
 <nav aria-label="Sections de l'espace employé" class="mb-4">
     <ul class="list-inline mb-0">
-        <li class="list-inline-item">
-            <a class="btn <?= $actif === 'commandes' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/employe"<?= $actif === 'commandes' ? ' aria-current="page"' : '' ?>>Commandes</a>
-        </li>
-        <li class="list-inline-item">
-            <a class="btn <?= $actif === 'avis' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/employe/avis"<?= $actif === 'avis' ? ' aria-current="page"' : '' ?>>Avis clients<?= (int) $avisEnAttente > 0 ? ' (' . (int) $avisEnAttente . ' en attente)' : '' ?></a>
-        </li>
+        <?php foreach ($onglets as $code => [$url, $libelle]): ?>
+            <li class="list-inline-item mb-2">
+                <a class="btn <?= $actif === $code ? 'btn-primary' : 'btn-outline-primary' ?>" href="<?= $this->e($url) ?>"<?= $actif === $code ? ' aria-current="page"' : '' ?>><?= $this->e($libelle) ?></a>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </nav>

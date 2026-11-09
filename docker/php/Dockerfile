@@ -23,3 +23,6 @@ RUN a2enconf app && echo "expose_php=Off" > /usr/local/etc/php/conf.d/security.i
 
 # Fuseau horaire de l'application (dates de prestation, horodatage des commandes)
 RUN echo "date.timezone=Europe/Paris" > /usr/local/etc/php/conf.d/timezone.ini
+
+# Dossier des images téléversées : volume Docker dédié, inscriptible par Apache
+RUN mkdir -p /var/www/html/public/assets/uploads/menus && chown -R www-data:www-data /var/www/html/public/assets/uploads

@@ -72,9 +72,11 @@ $home = $user ? \App\Core\Auth::home($user) : '';
             <div class="col-md-4">
                 <h2 class="footer-title">Horaires</h2>
                 <ul class="list-unstyled mb-0">
-                    <li>Lundi - Vendredi : 9h - 19h</li>
-                    <li>Samedi : 9h - 18h</li>
-                    <li>Dimanche : 10h - 14h</li>
+                    <?php foreach (\App\Service\OpeningHours::footerLines() as $ligneHoraire): ?>
+                        <li><?= $this->e($ligneHoraire) ?></li>
+                    <?php endforeach; ?>
+                    
+                    
                 </ul>
             </div>
             <div class="col-md-4">

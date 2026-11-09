@@ -1,0 +1,5 @@
+# Les fichiers téléversés ne sont jamais exécutés ni listés
+Options -Indexes -ExecCGI
+<FilesMatch "\.(php|phtml|phar|pl|py|cgi)$">
+    Require all denied
+</FilesMatch>
