@@ -16,6 +16,28 @@ final class OrderStatus
         'annulee' => 'Annulée',
     ];
 
+    /** Étapes suivantes possibles (hors annulation). */
+    public const SUIVANTS = [
+        'en_attente' => ['accepte'],
+        'accepte' => ['en_preparation'],
+        'en_preparation' => ['en_cours_livraison'],
+        'en_cours_livraison' => ['livre'],
+        'livre' => ['terminee', 'attente_retour_materiel'],
+        'attente_retour_materiel' => ['terminee'],
+    ];
+
+    /** Une commande ne s'annule plus une fois livrée. */
+    public const ANNULABLES = ['en_attente', 'accepte', 'en_preparation', 'en_cours_livraison'];
+
+    public const ACTIONS = [
+        'accepte' => 'Accepter la commande',
+        'en_preparation' => 'Passer en préparation',
+        'en_cours_livraison' => 'Passer en cours de livraison',
+        'livre' => 'Marquer comme livrée',
+        'terminee' => 'Marquer comme terminée',
+        'attente_retour_materiel' => 'Passer en attente du retour de matériel',
+    ];
+
     public static function label(string $statut): string
     {
         return self::LABELS[$statut] ?? $statut;
@@ -41,5 +63,30 @@ final class OrderStatus
         }
 
         return false;
+    }
+
+    /**
+     * Statuts que l'équipe peut choisir depuis $statut. Après « livrée », la suite dépend du prêt de matériel :
+     * terminée s'il n'y en a pas, attente du retour sinon.
+     *
+     * @return list<string>
+     */
+    public static function suivants(string $statut, bool $pretMateriel = false): array
+    {
+        if ($statut === 'livre') {
+            return [$pretMateriel ? 'attente_retour_materiel' : 'terminee'];
+        }
+
+        return self::SUIVANTS[$statut] ?? [];
+    }
+
+    public static function annulable(string $statut): bool
+    {
+        return in_array($statut, self::ANNULABLES, true);
+    }
+
+    public static function estFinal(string $statut): bool
+    {
+        return $statut === 'terminee' || $statut === 'annulee';
     }
 }

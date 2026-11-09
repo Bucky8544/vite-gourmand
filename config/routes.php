@@ -8,6 +8,8 @@ use App\Controller\MenuController;
 use App\Controller\OrderController;
 use App\Controller\PasswordController;
 use App\Controller\SpaceController;
+use App\Controller\StaffController;
+use App\Controller\StaffReviewController;
 use App\Controller\UserSpaceController;
 use App\Core\Router;
 
@@ -50,6 +52,13 @@ return static function (Router $r): void {
     $r->post('/mon-espace/commandes/{numero}/annuler', [UserSpaceController::class, 'annuler']);
     $r->post('/mon-espace/commandes/{numero}/avis', [UserSpaceController::class, 'avis']);
 
-    $r->get('/employe', [SpaceController::class, 'employe']);
+    // Espace employé (et administrateur)
+    $r->get('/employe', [StaffController::class, 'index']);
+    $r->get('/employe/commandes/{numero}', [StaffController::class, 'show']);
+    $r->post('/employe/commandes/{numero}/statut', [StaffController::class, 'changerStatut']);
+    $r->post('/employe/commandes/{numero}/annuler', [StaffController::class, 'annuler']);
+    $r->get('/employe/avis', [StaffReviewController::class, 'index']);
+    $r->post('/employe/avis/{id}/decision', [StaffReviewController::class, 'decider']);
+
     $r->get('/admin', [SpaceController::class, 'admin']);
 };

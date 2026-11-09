@@ -148,7 +148,7 @@ $formatDate = static function (string $dateHeure): array {
                         <?php if (isset($errors['commentaire'])): ?><div id="commentaire-erreur" class="invalid-feedback d-block"><?= $this->e($errors['commentaire']) ?></div><?php endif; ?>
                     </div>
                     <button type="submit" class="btn btn-primary">Envoyer mon avis</button>
-                    <p class="form-text mt-2">Votre avis sera publié sur notre site après validation par notre équipe.</p>
+                    <p class="form-text mt-2">Votre avis sera publié sur notre site après validation par notre équipe, avec votre prénom et l'initiale de votre nom (par exemple « Camille D. »). Votre adresse e-mail et votre nom complet ne sont jamais affichés.</p>
                 </form>
             <?php else: ?>
                 <p class="mb-0">Vous pourrez donner votre avis une fois la commande terminée.</p>

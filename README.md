@@ -95,6 +95,8 @@ docker compose exec web php scripts/test_menus.php
 docker compose exec web php scripts/test_menu_detail.php
 docker compose exec web php scripts/test_commande.php
 docker compose exec web php scripts/test_espace.php
+docker compose exec web php scripts/test_employe.php
+docker compose exec web php scripts/test_avis.php
 ```
 
 ## Comptes de test (développement)
@@ -140,3 +142,20 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
   dans une transaction avec verrou. L'annulation rend l'unité de stock au menu.
 - Le suivi des statuts (avec date et heure) apparaît une fois la commande acceptée.
 - Un avis (note de 1 à 5 et commentaire) peut être donné une fois la commande terminée ; il est publié après validation.
+
+## Espace employé : commandes
+
+- `/employe` : synthèse, filtres (statut, client ou numéro) et liste des commandes ; `/employe/commandes/{numero}` : détail et actions.
+- Statuts : accepté, en préparation, en cours de livraison, livré, puis terminé (ou attente du retour de matériel si du matériel
+  a été prêté). Les transitions sont vérifiées côté serveur dans une transaction.
+- Annulation par l'équipe : mode de contact (GSM ou mail), motif et confirmation obligatoires.
+- Mails automatiques : retour du matériel (600 € sous 10 jours ouvrés), invitation à donner son avis (commande terminée), annulation.
+- Statistiques MongoDB : écrites quand la commande est acceptée. Après une panne : `docker compose exec web php scripts/resync_stats.php --oui`.
+
+## Avis clients
+
+- Un client donne son avis (note de 1 à 5, commentaire) depuis sa commande terminée ; l'avis attend la validation d'un employé.
+- `/employe/avis` : les employés et l'administrateur valident, refusent, retirent ou republient un avis.
+- La page d'accueil affiche les 6 avis validés les plus récents, signés du prénom et de l'initiale du nom.
+- Données de démonstration (`sql/07_seed_avis.sql`) : 3 commandes terminées et 3 avis (2 validés, 1 en attente) ;
+  les deux clients ajoutés sont inactifs et ne servent qu'à signer ces avis.
