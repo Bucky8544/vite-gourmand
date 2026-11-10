@@ -180,3 +180,26 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .avatar { width: 64px; height: 64px; border-radius: 50%; flex: none; }
 .avis-carte { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 0; }
 .etoiles { color: var(--vg-or); font-size: 1.25rem; letter-spacing: 0.1rem; }
+
+/* ---------- Espace administrateur : graphiques en barres (SVG généré côté serveur) ---------- */
+.graph { display: block; width: 100%; height: auto; max-width: 720px; }
+.graph-label { font: 600 15px var(--vg-font-texte); fill: var(--vg-encre); }
+.graph-valeur { font: 600 15px var(--vg-font-texte); fill: var(--vg-bordeaux); }
+.graph-fond { fill: var(--vg-sable); }
+.graph-barre { fill: var(--vg-bordeaux); }
+.kpi-valeur { font-family: var(--vg-font-titre); font-size: 1.75rem; font-weight: 700; color: var(--vg-bordeaux); }
+EOcat > templates/admin/_nav.php << 'EOF'
+<?php /* $actif : statistiques ou employes */ ?>
+<nav aria-label="Sections de l'espace administrateur" class="mb-4">
+    <ul class="list-inline mb-0">
+        <li class="list-inline-item mb-2">
+            <a class="btn <?= $actif === 'statistiques' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin"<?= $actif === 'statistiques' ? ' aria-current="page"' : '' ?>>Statistiques</a>
+        </li>
+        <li class="list-inline-item mb-2">
+            <a class="btn <?= $actif === 'employes' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin/employes"<?= $actif === 'employes' ? ' aria-current="page"' : '' ?>>Comptes employés</a>
+        </li>
+        <li class="list-inline-item mb-2">
+            <a class="btn btn-outline-primary" href="/employe">Espace employé : commandes, avis, menus, horaires</a>
+        </li>
+    </ul>
+</nav>

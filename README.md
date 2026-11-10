@@ -98,6 +98,7 @@ docker compose exec web php scripts/test_espace.php
 docker compose exec web php scripts/test_employe.php
 docker compose exec web php scripts/test_avis.php
 docker compose exec web php scripts/test_catalogue.php
+docker compose exec web php scripts/test_admin.php
 ```
 
 ## Comptes de test (développement)
@@ -168,3 +169,14 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
 - `/employe/plats` : plats par type avec leurs allergènes ; un plat utilisé par un menu ne peut pas être supprimé.
 - `/employe/categories` : thèmes et régimes. `/employe/horaires` : horaires affichés dans le pied de page et appliqués à la livraison.
 - Les images téléversées sont stockées dans un volume Docker (`uploads`), hors du dépôt Git.
+
+## Espace administrateur
+
+- `/admin` : statistiques lues dans MongoDB (nombre de commandes et chiffre d'affaires par menu, filtres par menu et par période,
+  graphiques en barres accompagnés d'un tableau). Seules les commandes acceptées et non annulées comptent ; la période porte
+  sur la date de la prestation ; le montant est le total payé, livraison comprise.
+- `/admin/employes` : création de comptes employés (e-mail et mot de passe ; le mail n'indique pas le mot de passe),
+  désactivation et réactivation. Aucun compte administrateur ne peut être créé depuis l'application.
+- Après une installation neuve ou une panne de MongoDB : `docker compose exec web php scripts/resync_stats.php --oui`
+  ou le bouton « Reconstruire les statistiques ».
+- L'administrateur accède aussi à toutes les pages de l'espace employé.

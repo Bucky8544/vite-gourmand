@@ -22,7 +22,7 @@ final class HealthController
         }
 
         try {
-            (new Client(getenv('MONGO_URI') ?: 'mongodb://mongo:27017'))
+            (new Client(getenv('MONGO_URI') ?: 'mongodb://mongo:27017', ['serverSelectionTimeoutMS' => 3000, 'connectTimeoutMS' => 3000]))
                 ->selectDatabase('admin')->command(['ping' => 1]);
             $etat['mongo'] = 'ok';
         } catch (Throwable $e) {

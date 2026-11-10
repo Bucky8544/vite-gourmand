@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Controller\AdminController;
 use App\Controller\AuthController;
 use App\Controller\HealthController;
 use App\Controller\HomeController;
@@ -91,5 +92,10 @@ return static function (Router $r): void {
     $r->get('/employe/horaires', [StaffCatalogController::class, 'horaires']);
     $r->post('/employe/horaires', [StaffCatalogController::class, 'horairesEnregistrer']);
 
-    $r->get('/admin', [SpaceController::class, 'admin']);
+    // Espace administrateur
+    $r->get('/admin', [AdminController::class, 'index']);
+    $r->post('/admin/statistiques/resynchroniser', [AdminController::class, 'resynchroniser']);
+    $r->get('/admin/employes', [AdminController::class, 'employes']);
+    $r->post('/admin/employes', [AdminController::class, 'employeCreer']);
+    $r->post('/admin/employes/{id}/actif', [AdminController::class, 'employeBasculer']);
 };

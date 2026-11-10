@@ -22,7 +22,7 @@ final class StatsRepository
 
     public static function fromEnv(): self
     {
-        $client = new Client(getenv('MONGO_URI') ?: 'mongodb://mongo:27017');
+        $client = new Client(getenv('MONGO_URI') ?: 'mongodb://mongo:27017', ['serverSelectionTimeoutMS' => 3000, 'connectTimeoutMS' => 3000]);
         $base = getenv('MONGO_DB') ?: 'vite_gourmand';
 
         return new self($client->selectCollection($base, 'commandes_stats'));
