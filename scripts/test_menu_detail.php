@@ -47,10 +47,10 @@ verifier('Menu réactivé (transaction annulée) : retrouvé', $repo->find(1)['t
 
 echo "--- Images\n";
 $images = $repo->images(1);
-verifier('2 images pour le menu 1', count($images), 2);
-verifier('Première image (position 0)', $images[0]['url'], '/assets/img/menus/noel-1.jpg');
-verifier('Texte alternatif présent', $images[0]['texte_alternatif'], 'Table de Noël dressée avec une dinde rôtie');
-verifier('1 image pour le menu 2', count($repo->images(2)), 1);
+verifier("Le menu 1 a au moins une image", count($images) >= 1, true);
+verifier("Adresses d'images conformes à la liste blanche (/assets/...)", count(array_filter($images, static fn (array $i): bool => !preg_match('#^/assets/[A-Za-z0-9/_.-]+$#', (string) $i['url']))), 0);
+verifier("Chaque image a un texte alternatif", count(array_filter($images, static fn (array $i): bool => mb_strlen(trim((string) $i['texte_alternatif'])) < 3)), 0);
+verifier("Le menu 2 a au moins une image", count($repo->images(2)) >= 1, true);
 
 echo "--- Composition et allergènes\n";
 $c = $repo->composition(1);

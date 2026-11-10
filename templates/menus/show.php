@@ -20,6 +20,7 @@ $aDesPlats = ($composition['entree'] ?? []) !== [] || ($composition['plat'] ?? [
     <div class="row g-5">
         <div class="col-lg-6">
             <?php $this->partial('menus/_galerie', ['images' => $images]); ?>
+            <p class="mention-images">Photos non contractuelles</p>
         </div>
 
         <div class="col-lg-6">

@@ -208,3 +208,6 @@ EOcat > templates/admin/_nav.php << 'EOF'
 .champ-piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .legal h2 { margin-top: 2rem; }
 .legal-fictif { background: var(--vg-sable); border-left: 5px solid var(--vg-bordeaux); padding: 0.75rem 1rem; border-radius: 6px; }
+
+/* ---------- Page d'un menu : mention sous la galerie ---------- */
+.mention-images { margin: 0.75rem 0 0; text-align: center; font-size: 0.875rem; font-style: italic; color: var(--vg-gris); }
