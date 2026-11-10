@@ -23,7 +23,7 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
     <div class="container py-5">
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
-                <img class="img-fluid image-arrondie" src="/assets/img/placeholder-buffet.svg" alt="" width="640" height="400" loading="lazy">
+                <img class="img-fluid image-arrondie" src="/assets/img/accueil-presentation.jpg" alt="Événement en plein air devant des vignes et un château : table garnie de fromages, huîtres, magret et verrines, serveurs et invités, ardoise « Nos saveurs, votre événement Bordeaux »." width="1200" height="655" loading="lazy" decoding="async">
             </div>
             <div class="col-lg-7">
                 <p class="text-muted fw-bold mb-1">Présentation</p>
