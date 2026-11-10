@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 use App\Controller\AdminController;
 use App\Controller\AuthController;
+use App\Controller\ContactController;
+use App\Controller\PageController;
 use App\Controller\HealthController;
 use App\Controller\HomeController;
 use App\Controller\MenuController;
@@ -30,6 +32,13 @@ return static function (Router $r): void {
     $r->post('/commande', [OrderController::class, 'store']);
     $r->get('/commande/confirmation/{numero}', [OrderController::class, 'confirmation']);
     $r->get('/api/commande/prix', [OrderController::class, 'price']);
+
+    $r->get('/contact', [ContactController::class, 'show']);
+    $r->post('/contact', [ContactController::class, 'send']);
+    $r->get('/mentions-legales', [PageController::class, 'mentions']);
+    $r->get('/cgv', [PageController::class, 'cgv']);
+    $r->get('/confidentialite', [PageController::class, 'confidentialite']);
+    $r->get('/accessibilite', [PageController::class, 'accessibilite']);
 
     $r->get('/inscription', [AuthController::class, 'showRegister']);
     $r->post('/inscription', [AuthController::class, 'register']);

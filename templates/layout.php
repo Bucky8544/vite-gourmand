@@ -85,6 +85,7 @@ $home = $user ? \App\Core\Auth::home($user) : '';
                     <li><a href="/mentions-legales">Mentions légales</a></li>
                     <li><a href="/cgv">Conditions générales de vente</a></li>
                     <li><a href="/confidentialite">Politique de confidentialité</a></li>
+                    <li><a href="/accessibilite">Accessibilité</a></li>
                     <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>

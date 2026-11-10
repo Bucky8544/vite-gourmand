@@ -99,6 +99,7 @@ docker compose exec web php scripts/test_employe.php
 docker compose exec web php scripts/test_avis.php
 docker compose exec web php scripts/test_catalogue.php
 docker compose exec web php scripts/test_admin.php
+docker compose exec web php scripts/test_contact.php
 ```
 
 ## Comptes de test (développement)
@@ -180,3 +181,12 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
 - Après une installation neuve ou une panne de MongoDB : `docker compose exec web php scripts/resync_stats.php --oui`
   ou le bouton « Reconstruire les statistiques ».
 - L'administrateur accède aussi à toutes les pages de l'espace employé.
+
+## Contact et pages légales
+
+- `/contact` : formulaire (e-mail, objet, message) envoyé à l'adresse `CONTACT_TO` (variable d'environnement), avec l'adresse du
+  visiteur en « Répondre à ». Protections : jeton CSRF, champ piège, délai minimal de 2 secondes, 3 envois maximum par session
+  toutes les 15 minutes.
+- Pages d'information : `/mentions-legales`, `/cgv`, `/confidentialite`, `/accessibilite`.
+- Les informations de l'entreprise (adresse, SIREN, hébergeur, médiateur, modalités de paiement) sont dans `config/entreprise.php`.
+  Ce sont des exemples fictifs : les remplacer, puis passer `'fictif'` à `false` pour retirer le bandeau d'avertissement.

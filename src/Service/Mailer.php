@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 final class Mailer
 {
-    public function send(string $to, string $toName, string $subject, string $html, string $text): void
+    public function send(string $to, string $toName, string $subject, string $html, string $text, ?string $replyTo = null): void
     {
         $m = new PHPMailer(true);
         $m->isSMTP();
@@ -28,6 +28,9 @@ final class Mailer
 
         $m->setFrom(getenv('MAIL_FROM') ?: 'no-reply@vite-gourmand.test', getenv('MAIL_FROM_NAME') ?: 'Vite & Gourmand');
         $m->addAddress($to, $toName);
+        if ($replyTo !== null && $replyTo !== '') {
+            $m->addReplyTo($replyTo);
+        }
         $m->Subject = $subject;
         $m->isHTML(true);
         $m->Body = $html;
