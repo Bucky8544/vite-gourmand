@@ -13,7 +13,7 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid image-arrondie" src="/assets/img/placeholder-menu.svg" alt="" width="640" height="400">
+                <img class="img-fluid image-arrondie" src="/assets/img/accueil-banniere.jpg" alt="Table en bois dressée pour les fêtes : bûche, volaille aux marrons, brioche de Pâques, chou-fleur rôti et petits fours, devant un pont sur le fleuve." width="1200" height="655" fetchpriority="high" decoding="async">
             </div>
         </div>
     </div>
