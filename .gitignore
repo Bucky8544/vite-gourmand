@@ -3,3 +3,7 @@
 vendor/
 node_modules/
 *.log
+
+# Images téléversées par l'équipe (volume Docker, pas dans le dépôt)
+public/assets/uploads/menus/*
+!public/assets/uploads/menus/.gitkeep

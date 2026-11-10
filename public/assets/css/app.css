@@ -1,0 +1,213 @@
+:root {
+  --vg-bordeaux: #742431;
+  --vg-bordeaux-fonce: #5A1B26;
+  --vg-creme: #FAF4E6;
+  --vg-carte: #FCF9F2;
+  --vg-blanc: #FFFFFF;
+  --vg-sable: #E5CEA5;
+  --vg-encre: #2E2110;
+  --vg-gris: #5C5148;
+  --vg-or: #EAA830;
+  --vg-or-fonce: #8A5A00;
+  --vg-succes: #2F6B3A;
+  --vg-erreur: #B3261E;
+
+  --vg-font-titre: "Playfair Display", Georgia, serif;
+  --vg-font-texte: "Inter", system-ui, sans-serif;
+
+  --bs-body-bg: var(--vg-creme);
+  --bs-body-color: var(--vg-encre);
+  --bs-body-font-family: var(--vg-font-texte);
+  --bs-link-color: var(--vg-bordeaux);
+  --bs-link-hover-color: var(--vg-bordeaux-fonce);
+}
+
+body { line-height: 1.6; }
+
+h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
+
+:focus-visible { outline: 3px solid var(--vg-bordeaux); outline-offset: 2px; }
+
+.skip-link {
+  position: absolute; left: 0.5rem; top: -4rem; z-index: 1000;
+  background: var(--vg-bordeaux); color: #fff; padding: 0.5rem 1rem; border-radius: 0 0 8px 8px;
+}
+.skip-link:focus { top: 0; color: #fff; }
+
+.btn-primary {
+  --bs-btn-bg: var(--vg-bordeaux);
+  --bs-btn-border-color: var(--vg-bordeaux);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-hover-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-active-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-border-radius: 8px;
+  font-weight: 600;
+}
+
+.site-header { background: var(--vg-creme); border-bottom: 1px solid var(--vg-sable); }
+.navbar-brand { font-family: var(--vg-font-titre); font-weight: 700; color: var(--vg-bordeaux); line-height: 1.1; }
+.navbar .nav-link { color: var(--vg-encre); }
+.navbar .nav-link.active { font-weight: 700; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; text-decoration-color: var(--vg-bordeaux); }
+
+.site-footer { background: var(--vg-bordeaux-fonce); color: var(--vg-creme); margin-top: 4rem; }
+.site-footer a { color: var(--vg-creme); }
+.footer-brand { font-family: var(--vg-font-titre); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.footer-title { font-family: var(--vg-font-texte); font-size: 1.1rem; font-weight: 700; color: var(--vg-creme); }
+
+.regles li { color: var(--vg-gris); }
+.regles li.ok { color: var(--vg-succes); font-weight: 600; }
+.regles .etat { display: inline-block; width: 1.2em; }
+
+.btn-outline-primary {
+  --bs-btn-color: var(--vg-bordeaux);
+  --bs-btn-border-color: var(--vg-bordeaux);
+  --bs-btn-hover-bg: var(--vg-bordeaux);
+  --bs-btn-hover-border-color: var(--vg-bordeaux);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--vg-bordeaux-fonce);
+  --bs-btn-active-border-color: var(--vg-bordeaux-fonce);
+  --bs-btn-active-color: #fff;
+  --bs-btn-border-radius: 8px;
+  --bs-btn-border-width: 2px;
+  font-weight: 600;
+}
+
+/* Messages : couleurs de la charte, contrastes vérifiés (au moins 4,5:1) */
+.alert-success { --bs-alert-color: #1D4A27; --bs-alert-bg: #E6F0E8; --bs-alert-border-color: var(--vg-succes); }
+.alert-info    { --bs-alert-color: var(--vg-encre); --bs-alert-bg: var(--vg-sable); --bs-alert-border-color: var(--vg-bordeaux); }
+.alert-danger  { --bs-alert-color: #7A1913; --bs-alert-bg: #FBE9E7; --bs-alert-border-color: var(--vg-erreur); }
+
+/* Champs de formulaire : bordure grise de la charte (contraste d'au moins 3:1) */
+.form-control, .form-select { border-color: var(--vg-gris); }
+.form-text { color: var(--vg-gris); }
+
+/* Panneau de filtres */
+.filtres { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 10px; overflow: hidden; }
+.filtres-titre { background: var(--vg-sable); color: var(--vg-encre); font-family: var(--vg-font-texte);
+                 font-size: 1.25rem; font-weight: 700; margin: 0; padding: 0.9rem 1.25rem; }
+.filtres-corps { padding: 1.25rem; }
+.filtres legend { float: none; width: auto; padding: 0; margin-bottom: 0.5rem; }
+
+/* Cartes de menu */
+.menu-card { --bs-card-bg: var(--vg-carte); --bs-card-border-color: #D8C7A3; --bs-card-border-radius: 12px; overflow: hidden; }
+.menu-card .card-img-top { aspect-ratio: 16 / 10; object-fit: cover; }
+.menu-desc { color: var(--vg-gris); }
+.menu-prix .prix { font-family: var(--vg-font-titre); font-size: 1.5rem; font-weight: 700; color: var(--vg-bordeaux); }
+
+.pastille { display: inline-block; background: var(--vg-sable); color: var(--vg-encre); border-radius: 999px;
+            padding: 0.15rem 0.75rem; font-size: 0.875rem; margin-right: 0.25rem; }
+.pastille-alerte { background: #FBE9E7; color: #7A1913; border: 1px solid var(--vg-erreur); }
+
+/* Mise à jour des menus en cours */
+#zone-resultats.chargement { opacity: 0.6; transition: opacity 0.15s; }
+@media (prefers-reduced-motion: reduce) { #zone-resultats.chargement { transition: none; } }
+
+/* ---------- Vue détaillée d'un menu ---------- */
+.breadcrumb { --bs-breadcrumb-divider-color: var(--vg-gris); --bs-breadcrumb-item-active-color: var(--vg-gris); }
+
+.galerie-principale img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: 14px; }
+.galerie-vignettes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; padding: 0; margin: 0.75rem 0 0; }
+.vignette { display: block; border-radius: 10px; }
+.vignette img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover;
+                border-radius: 10px; border: 3px solid transparent; }
+.vignette[aria-current="true"] img { border-color: var(--vg-bordeaux); }
+
+.menu-prix-detail .prix { font-size: 2.25rem; }
+.remise-info { color: var(--vg-gris); }
+.stock { font-weight: 600; }
+.stock-point { display: inline-block; width: 0.65rem; height: 0.65rem; border-radius: 50%;
+               background: var(--vg-succes); margin-right: 0.4rem; }
+
+/* Conditions du menu : doivent rester bien visibles (exigence du sujet) */
+.conditions { background: var(--vg-sable); border: 3px solid var(--vg-bordeaux); border-radius: 12px; padding: 1.25rem 1.5rem; }
+.conditions-titre { display: flex; align-items: center; gap: 0.75rem; margin: 0; color: var(--vg-encre);
+                    font-family: var(--vg-font-texte); font-size: 1.25rem; font-weight: 700; }
+.conditions-icone { display: inline-flex; align-items: center; justify-content: center; flex: none;
+                    width: 2rem; height: 2rem; border-radius: 50%; background: var(--vg-bordeaux); color: #fff; font-weight: 700; }
+.conditions p { margin: 0.75rem 0 0; white-space: pre-line; }
+
+.composition-carte { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.composition-carte h3 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #D8C7A3; }
+.plat { padding: 0.75rem 0; border-top: 1px solid #D8C7A3; }
+.plat:first-child { padding-top: 0; border-top: 0; }
+.plat-nom { display: block; font-weight: 700; }
+.plat-allergenes { display: block; color: var(--vg-gris); font-size: 0.9375rem; }
+
+/* ---------- Commande ---------- */
+.estimation { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.estimation-erreur { color: var(--vg-erreur); font-weight: 600; }
+
+.devis { --bs-table-bg: transparent; }
+.devis th { font-weight: 600; }
+.devis-total th, .devis-total td { font-size: 1.25rem; font-weight: 700; color: var(--vg-bordeaux); border-top: 2px solid var(--vg-bordeaux); }
+
+/* ---------- Espace utilisateur ---------- */
+.carte-espace { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.carte-espace dt { font-size: 0.875rem; color: var(--vg-gris); font-weight: 600; }
+.carte-espace dd { margin-bottom: 0.75rem; }
+
+/* Statuts : toujours écrits en toutes lettres, la couleur n'est qu'un renfort */
+.statut { display: inline-block; padding: 0.15rem 0.75rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; border: 1px solid transparent; }
+.statut-en_attente { background: var(--vg-sable); color: var(--vg-encre); border-color: #C9B27F; }
+.statut-accepte, .statut-en_preparation, .statut-en_cours_livraison, .statut-livre { background: #E6F0E8; color: #1D4A27; border-color: var(--vg-succes); }
+.statut-attente_retour_materiel { background: #FFF3D6; color: #6B4400; border-color: var(--vg-or-fonce); }
+.statut-terminee { background: var(--vg-bordeaux); color: #fff; }
+.statut-annulee { background: #FBE9E7; color: #7A1913; border-color: var(--vg-erreur); }
+
+/* Suivi de commande */
+.suivi { margin: 0 0 1rem; padding: 0; }
+.suivi li { position: relative; display: flex; flex-wrap: wrap; gap: 0.15rem 1rem; padding: 0.6rem 0 0.6rem 1.5rem; border-left: 3px solid var(--vg-sable); }
+.suivi li::before { content: ""; position: absolute; left: -9px; top: 0.95rem; width: 15px; height: 15px; border-radius: 50%; background: var(--vg-bordeaux); }
+.suivi-statut { font-weight: 700; }
+.suivi time { color: var(--vg-gris); }
+
+/* ---------- Espace employé ---------- */
+.synthese { margin-bottom: 0; }
+.synthese li { margin-bottom: 0.5rem; }
+.synthese a { text-decoration: none; color: var(--vg-encre); }
+.synthese a:hover strong { text-decoration: underline; }
+.pagination { --bs-pagination-color: var(--vg-bordeaux); --bs-pagination-active-bg: var(--vg-bordeaux); --bs-pagination-active-border-color: var(--vg-bordeaux); }
+
+/* ---------- Page d'accueil ---------- */
+.image-arrondie { border-radius: 14px; }
+.bande-sable { background: var(--vg-sable); }
+.liste-coches li { position: relative; padding-left: 1.75rem; margin-bottom: 0.5rem; }
+.liste-coches li::before { content: ""; position: absolute; left: 0; top: 0.35rem; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--vg-bordeaux); }
+.liste-coches li::after { content: ""; position: absolute; left: 0.38rem; top: 0.52rem; width: 0.3rem; height: 0.55rem; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.avatar { width: 64px; height: 64px; border-radius: 50%; flex: none; }
+.avis-carte { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 0; }
+.etoiles { color: var(--vg-or); font-size: 1.25rem; letter-spacing: 0.1rem; }
+
+/* ---------- Espace administrateur : graphiques en barres (SVG généré côté serveur) ---------- */
+.graph { display: block; width: 100%; height: auto; max-width: 720px; }
+.graph-label { font: 600 15px var(--vg-font-texte); fill: var(--vg-encre); }
+.graph-valeur { font: 600 15px var(--vg-font-texte); fill: var(--vg-bordeaux); }
+.graph-fond { fill: var(--vg-sable); }
+.graph-barre { fill: var(--vg-bordeaux); }
+.kpi-valeur { font-family: var(--vg-font-titre); font-size: 1.75rem; font-weight: 700; color: var(--vg-bordeaux); }
+EOcat > templates/admin/_nav.php << 'EOF'
+<?php /* $actif : statistiques ou employes */ ?>
+<nav aria-label="Sections de l'espace administrateur" class="mb-4">
+    <ul class="list-inline mb-0">
+        <li class="list-inline-item mb-2">
+            <a class="btn <?= $actif === 'statistiques' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin"<?= $actif === 'statistiques' ? ' aria-current="page"' : '' ?>>Statistiques</a>
+        </li>
+        <li class="list-inline-item mb-2">
+            <a class="btn <?= $actif === 'employes' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin/employes"<?= $actif === 'employes' ? ' aria-current="page"' : '' ?>>Comptes employés</a>
+        </li>
+        <li class="list-inline-item mb-2">
+            <a class="btn btn-outline-primary" href="/employe">Espace employé : commandes, avis, menus, horaires</a>
+        </li>
+    </ul>
+</nav>
+
+/* ---------- Contact et pages légales ---------- */
+.champ-piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.legal h2 { margin-top: 2rem; }
+.legal-fictif { background: var(--vg-sable); border-left: 5px solid var(--vg-bordeaux); padding: 0.75rem 1rem; border-radius: 6px; }
+
+/* ---------- Page d'un menu : mention sous la galerie ---------- */
+.mention-images { margin: 0.75rem 0 0; text-align: center; font-size: 0.875rem; font-style: italic; color: var(--vg-gris); }
