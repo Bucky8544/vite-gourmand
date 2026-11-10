@@ -45,14 +45,14 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
         <p class="text-center lead mb-4">Le même soin, de la cuisine à la livraison.</p>
         <div class="row g-4">
             <?php foreach ([
-                ['Savoir-faire', "Julie et José préparent chaque prestation avec le soin de 25 ans d'expérience."],
-                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année."],
-                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement."],
-            ] as [$titre, $texte]): ?>
+                ['Savoir-faire', "Julie et José préparent chaque prestation avec le soin de 25 ans d'expérience.", '/assets/img/savoir-faire.jpg'],
+                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année.", '/assets/img/placeholder-personne.svg'],
+                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement.", '/assets/img/placeholder-personne.svg'],
+            ] as [$titre, $texte, $image]): ?>
                 <div class="col-md-4">
                     <article class="carte-espace h-100">
                         <div class="d-flex align-items-center gap-3 mb-2">
-                            <img class="avatar" src="/assets/img/placeholder-personne.svg" alt="" width="64" height="64" loading="lazy">
+                            <img class="avatar" src="<?= $this->e($image) ?>" alt="" width="96" height="96" loading="lazy">
                             <h3 class="h5 mb-0"><?= $this->e($titre) ?></h3>
                         </div>
                         <p class="mb-0"><?= $this->e($texte) ?></p>
