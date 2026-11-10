@@ -46,8 +46,8 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
         <div class="row g-4">
             <?php foreach ([
                 ['Savoir-faire', "Julie et José préparent chaque prestation avec le soin de 25 ans d'expérience.", '/assets/img/savoir-faire.jpg'],
-                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année.", '/assets/img/placeholder-personne.svg'],
-                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement.", '/assets/img/placeholder-personne.svg'],
+                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année.", '/assets/img/menus-de-saison.jpg'],
+                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement.", '/assets/img/service-soigne.jpg'],
             ] as [$titre, $texte, $image]): ?>
                 <div class="col-md-4">
                     <article class="carte-espace h-100">

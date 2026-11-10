@@ -211,3 +211,6 @@ EOcat > templates/admin/_nav.php << 'EOF'
 
 /* ---------- Page d'un menu : mention sous la galerie ---------- */
 .mention-images { margin: 0.75rem 0 0; text-align: center; font-size: 0.875rem; font-style: italic; color: var(--vg-gris); }
+
+/* Fin contour autour des illustrations de la section équipe */
+.avatar { box-shadow: 0 0 0 1px #D8C7A3; }
