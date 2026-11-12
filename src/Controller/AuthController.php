@@ -176,8 +176,10 @@ final class AuthController
         }
 
         Auth::login($user);
-        Session::flash('success', 'Vous êtes connecté' . (!empty($user['prenom']) ? ', ' . $user['prenom'] : '') . '.');
-        Http::redirect($redirect ?? Auth::home($user));
+        Session::flash('success', 'Bienvenue' . (!empty($user['prenom']) ? ' ' . $user['prenom'] : '') . ' !');
+        // Un client arrive sur la page d'accueil (ou retourne là où il voulait aller) ; l'équipe et l'administrateur arrivent dans leur espace
+        $destination = ($user['role'] ?? '') === 'utilisateur' ? '/' : Auth::home($user);
+        Http::redirect($redirect ?? $destination);
     }
 
     public function logout(): void
