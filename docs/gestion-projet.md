@@ -1,21 +1,21 @@
 # Gestion de projet
 
 ## Contexte
-Projet réalisé seul, en environ 70 h, pour le client « Vite & Gourmand ».
+Projet réalisé, en environ 70 h, pour le client « Vite & Gourmand ».
 Livraison de l'application déployée et fonctionnelle à la date de rendu.
 
 ## Outil
-Trello (tableau Kanban) : https://trello.com/b/VOTRE-LIEN
+Trello (tableau Kanban) : [https://trello.com/b/FCXtxHt2](https://trello.com/b/FCXtxHt2)
 
 Colonnes : Backlog, Sprint en cours, En cours, En test, Terminé.
-Étiquettes : une couleur par épopée (Conception, Visiteur, Utilisateur, Employé, Admin, Transverse).
+Étiquettes : une couleur par Sprint (1-Prioritaire, 2-Prioritaire, 3-Prioritaire, 4-Prioritaire).
 
 Choix de l'outil : gratuit, visuel, lien partageable avec le jury, sans configuration lourde.
 
 ## Méthode
 
 ### Découpage en sprints
-| Sprint | Objectif | Durée estimée |
+| Sprint | Objectif | Durée estimée (approximative) |
 |---|---|---|
 | 1 | Conception et fondations | 20 h |
 | 2 | Back-end et fonctionnalités visiteur | 20 h |
@@ -23,9 +23,9 @@ Choix de l'outil : gratuit, visuel, lien partageable avec le jury, sans configur
 | 4 | Admin, qualité, déploiement, documentation | 12 h |
 
 ### Priorisation MoSCoW
-- Must : exigences explicites du sujet
-- Should : améliorations importantes
-- Could : bonus traités en fin de projet
+- Must : exigences explicites du sujet (ici : prioritaire)
+- Should : améliorations importantes (ici : secondaire)
+- Could : bonus traités en fin de projet (ici : optionnel)
 
 ### Définition de « terminé »
 Une carte passe en « Terminé » uniquement si :

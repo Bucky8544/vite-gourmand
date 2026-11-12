@@ -119,7 +119,6 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 }
 ```
 
-## 7. Maquettes (à ajouter)
+## 7. Maquettes
 
-Wireframes et mockups : 3 desktop et 3 mobile (accueil, liste des menus avec filtres, commande
-ou espace administrateur). Les exports seront ajoutés dans `docs/maquettes/`.
+Wireframes et maquettes en version bureau (3 pages) et mobile (3 pages) : voir `charte-graphique.pdf` et les exports du dossier `docs/maquettes/`.
