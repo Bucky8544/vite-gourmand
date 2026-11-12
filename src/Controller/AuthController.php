@@ -4,12 +4,15 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Core\Auth;
+use App\Core\ClientIp;
 use App\Core\Http;
 use App\Core\Session;
 use App\Core\View;
 use App\Repository\UserRepository;
 use App\Service\AuthService;
+use App\Service\LoginThrottle;
 use App\Service\Mailer;
+use App\Service\SignupThrottle;
 use App\Validation\RegistrationValidator;
 use PDOException;
 use Throwable;
@@ -40,6 +43,24 @@ final class AuthController
             return;
         }
 
+        // Limite les comptes créés depuis une même adresse (chaque inscription envoie un e-mail)
+        $ip = ClientIp::courante();
+        $inscriptions = null;
+        $attente = null;
+        try {
+            $inscriptions = new SignupThrottle();
+            $attente = $inscriptions->attente($ip);
+        } catch (Throwable $e) {
+            error_log('Limitation des inscriptions indisponible : ' . $e->getMessage());
+            $inscriptions = null;
+        }
+        if ($attente !== null) {
+            header('Retry-After: ' . $attente);
+            $this->refuseRegister(['_general' => 'Trop de comptes ont été créés depuis votre connexion. Réessayez dans '
+                . $this->duree($attente) . '.'], $data, 429);
+            return;
+        }
+
         try {
             (new UserRepository())->createUser($data, password_hash($result['password'], PASSWORD_DEFAULT));
         } catch (PDOException $e) {
@@ -49,6 +70,14 @@ final class AuthController
                 return;
             }
             throw $e;
+        }
+
+        if ($inscriptions !== null) {
+            try {
+                $inscriptions->enregistrer($ip);
+            } catch (Throwable $e) {
+                error_log('Limitation des inscriptions : enregistrement impossible : ' . $e->getMessage());
+            }
         }
 
         $mailOk = true;
@@ -68,9 +97,9 @@ final class AuthController
         Http::redirect('/connexion' . ($suite !== null ? '?redirect=' . rawurlencode($suite) : ''));
     }
 
-    private function refuseRegister(array $errors, array $old): void
+    private function refuseRegister(array $errors, array $old, int $statut = 422): void
     {
-        http_response_code(422);
+        http_response_code($statut);
         View::render('auth/register', ['title' => 'Créer un compte', 'errors' => $errors, 'old' => $old]);
     }
 
@@ -94,9 +123,40 @@ final class AuthController
         $password = is_string($_POST['mot_de_passe'] ?? null) ? $_POST['mot_de_passe'] : '';
         $redirect = $this->redirectParam($_POST['redirect'] ?? null);
 
+        $ip = ClientIp::courante();
+        $limite = null;
+        $attente = null;
+        try {
+            $limite = new LoginThrottle();
+            $attente = $limite->attente($email, $ip);
+        } catch (Throwable $e) {
+            error_log('Limitation des connexions indisponible : ' . $e->getMessage());
+            $limite = null;
+        }
+
+        if ($attente !== null) {
+            // Trop d'échecs récents : on ne vérifie même pas le mot de passe, une bonne réponse ne doit rien révéler
+            http_response_code(429);
+            header('Retry-After: ' . $attente);
+            View::render('auth/login', [
+                'title' => 'Connexion',
+                'error' => 'Trop de tentatives de connexion. Réessayez dans ' . $this->duree($attente) . '.',
+                'old' => ['email' => $email],
+                'redirect' => $redirect,
+            ]);
+            return;
+        }
+
         $user = ($email !== '' && $password !== '') ? (new AuthService())->attempt($email, $password) : null;
 
         if ($user === null) {
+            if ($limite !== null && $email !== '' && $password !== '') {
+                try {
+                    $limite->echec($email, $ip);
+                } catch (Throwable $e) {
+                    error_log('Limitation des connexions : enregistrement impossible : ' . $e->getMessage());
+                }
+            }
             http_response_code(401);
             View::render('auth/login', [
                 'title' => 'Connexion',
@@ -105,6 +165,14 @@ final class AuthController
                 'redirect' => $redirect,
             ]);
             return;
+        }
+
+        if ($limite !== null) {
+            try {
+                $limite->succes($email, $ip);
+            } catch (Throwable $e) {
+                error_log('Limitation des connexions : remise à zéro impossible : ' . $e->getMessage());
+            }
         }
 
         Auth::login($user);
@@ -122,5 +190,13 @@ final class AuthController
     private function redirectParam(mixed $value): ?string
     {
         return is_string($value) && strlen($value) <= 500 && Http::isSafePath($value) ? $value : null;
+    }
+
+    /** « 1 minute », « 14 minutes »… */
+    private function duree(int $secondes): string
+    {
+        $minutes = max(1, (int) ceil($secondes / 60));
+
+        return $minutes . ' minute' . ($minutes > 1 ? 's' : '');
     }
 }
