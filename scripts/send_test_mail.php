@@ -8,6 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use App\Service\Mailer;
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 $destinataire = trim($argv[1] ?? '');
 if (!filter_var($destinataire, FILTER_VALIDATE_EMAIL)) {
@@ -36,6 +37,14 @@ if ($hote === '' || $port === 1025) {
     $m->Username = $utilisateur;
     $m->Password = $cle;
     $m->Timeout = 15;
+    // On garde seulement les réponses du SERVEUR : les lignes que nous envoyons contiennent les identifiants, elles ne sont jamais affichées
+    $reponses = [];
+    $m->SMTPDebug = SMTP::DEBUG_SERVER;
+    $m->Debugoutput = static function (string $texte, int $niveau) use (&$reponses): void {
+        if (str_contains($texte, 'SERVER -> CLIENT')) {
+            $reponses[] = trim(preg_replace('/\s+/', ' ', $texte) ?? '');
+        }
+    };
     $m->SMTPSecure = $port === 465 ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
     try {
         $m->smtpConnect();
@@ -43,6 +52,9 @@ if ($hote === '' || $port === 1025) {
         echo "1. Connexion et authentification au serveur d'envoi : OK\n";
     } catch (MailException $e) {
         fwrite(STDERR, "1. ÉCHEC de la connexion ou de l'authentification : " . $e->getMessage() . "\n");
+        foreach (array_slice($reponses, -4) as $ligne) {
+            fwrite(STDERR, '   ' . $ligne . "\n");
+        }
         exit(1);
     }
 }
