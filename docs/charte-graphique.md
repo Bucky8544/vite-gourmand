@@ -118,8 +118,3 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
   --bs-btn-border-radius: 8px;
 }
 ```
-
-## 7. Maquettes (à ajouter)
-
-Wireframes et mockups : 3 desktop et 3 mobile (accueil, liste des menus avec filtres, commande
-ou espace administrateur). Les exports seront ajoutés dans `docs/maquettes/`.
