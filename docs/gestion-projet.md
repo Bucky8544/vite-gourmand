@@ -5,7 +5,7 @@ Projet réalisé, en environ 70 h, pour le client « Vite & Gourmand ».
 Livraison de l'application déployée et fonctionnelle à la date de rendu.
 
 ## Outil
-Trello (tableau Kanban) : [https://trello.com/b/https://trello.com/b/FCXtxHt2](https://trello.com/b/FCXtxHt2)
+Trello (tableau Kanban) : [https://trello.com/b/FCXtxHt2](https://trello.com/b/FCXtxHt2)
 
 Colonnes : Backlog, Sprint en cours, En cours, En test, Terminé.
 Étiquettes : une couleur par Sprint (1-Prioritaire, 2-Prioritaire, 3-Prioritaire, 4-Prioritaire).
@@ -15,7 +15,7 @@ Choix de l'outil : gratuit, visuel, lien partageable avec le jury, sans configur
 ## Méthode
 
 ### Découpage en sprints
-| Sprint | Objectif | Durée estimée (durée approximative)|
+| Sprint | Objectif | Durée estimée (approximative) |
 |---|---|---|
 | 1 | Conception et fondations | 20 h |
 | 2 | Back-end et fonctionnalités visiteur | 20 h |

@@ -118,3 +118,7 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
   --bs-btn-border-radius: 8px;
 }
 ```
+
+## 7. Maquettes
+
+Wireframes et maquettes en version bureau (3 pages) et mobile (3 pages) : voir `charte-graphique.pdf` et les exports du dossier `docs/maquettes/`.
