@@ -177,7 +177,7 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .liste-coches li { position: relative; padding-left: 1.75rem; margin-bottom: 0.5rem; }
 .liste-coches li::before { content: ""; position: absolute; left: 0; top: 0.35rem; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--vg-bordeaux); }
 .liste-coches li::after { content: ""; position: absolute; left: 0.38rem; top: 0.52rem; width: 0.3rem; height: 0.55rem; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-.avatar { width: 64px; height: 64px; border-radius: 50%; flex: none; }
+.avatar { width: 96px; height: 96px; border-radius: 50%; flex: none; }
 .avis-carte { background: var(--vg-carte); border: 1px solid #D8C7A3; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 0; }
 .etoiles { color: var(--vg-or); font-size: 1.25rem; letter-spacing: 0.1rem; }
 
@@ -211,3 +211,6 @@ EOcat > templates/admin/_nav.php << 'EOF'
 
 /* ---------- Page d'un menu : mention sous la galerie ---------- */
 .mention-images { margin: 0.75rem 0 0; text-align: center; font-size: 0.875rem; font-style: italic; color: var(--vg-gris); }
+
+/* Fin contour autour des illustrations de la section équipe */
+.avatar { box-shadow: 0 0 0 1px #D8C7A3; }

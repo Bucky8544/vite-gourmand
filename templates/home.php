@@ -13,7 +13,7 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid image-arrondie" src="/assets/img/placeholder-menu.svg" alt="" width="640" height="400">
+                <img class="img-fluid image-arrondie" src="/assets/img/accueil-banniere.jpg" alt="Table en bois dressée pour les fêtes : bûche, volaille aux marrons, brioche de Pâques, chou-fleur rôti et petits fours, devant un pont sur le fleuve." width="1200" height="655" fetchpriority="high" decoding="async">
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
     <div class="container py-5">
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
-                <img class="img-fluid image-arrondie" src="/assets/img/placeholder-buffet.svg" alt="" width="640" height="400" loading="lazy">
+                <img class="img-fluid image-arrondie" src="/assets/img/accueil-presentation.jpg" alt="Événement en plein air devant des vignes et un château : table garnie de fromages, huîtres, magret et verrines, serveurs et invités, ardoise « Nos saveurs, votre événement Bordeaux »." width="1200" height="655" loading="lazy" decoding="async">
             </div>
             <div class="col-lg-7">
                 <p class="text-muted fw-bold mb-1">Présentation</p>
@@ -45,14 +45,14 @@ $moyenne = number_format($statsAvis['moyenne'], 1, ',', '');
         <p class="text-center lead mb-4">Le même soin, de la cuisine à la livraison.</p>
         <div class="row g-4">
             <?php foreach ([
-                ['Savoir-faire', "Julie et José préparent chaque prestation avec le soin de 25 ans d'expérience."],
-                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année."],
-                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement."],
-            ] as [$titre, $texte]): ?>
+                ['Savoir-faire', "Julie et José préparent chaque prestation avec le soin de 25 ans d'expérience.", '/assets/img/savoir-faire.jpg'],
+                ['Menus de saison', "Une carte en constante évolution, pensée pour chaque fête de l'année.", '/assets/img/menus-de-saison.jpg'],
+                ['Service soigné', "Livraison à l'heure choisie, au lieu de votre événement.", '/assets/img/service-soigne.jpg'],
+            ] as [$titre, $texte, $image]): ?>
                 <div class="col-md-4">
                     <article class="carte-espace h-100">
                         <div class="d-flex align-items-center gap-3 mb-2">
-                            <img class="avatar" src="/assets/img/placeholder-personne.svg" alt="" width="64" height="64" loading="lazy">
+                            <img class="avatar" src="<?= $this->e($image) ?>" alt="" width="96" height="96" loading="lazy">
                             <h3 class="h5 mb-0"><?= $this->e($titre) ?></h3>
                         </div>
                         <p class="mb-0"><?= $this->e($texte) ?></p>
