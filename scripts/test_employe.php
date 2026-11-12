@@ -120,7 +120,7 @@ try {
     verifier('Historique complet dans l\'ordre', $statuts($c1['id']),
         ['en_attente', 'accepte', 'en_preparation', 'en_cours_livraison', 'livre', 'attente_retour_materiel', 'terminee']);
     $acteurs = array_column($repo->history($c1['id']), 'email');
-    verifier('Auteur des changements enregistré', [$acteurs[0], $acteurs[1], $acteurs[6]], [null, $emails[1], $emails[1]]);
+    verifier('Auteur des changements : le client pour le premier statut, l\'employé ensuite', [$acteurs[0], $acteurs[1], $acteurs[6]], [$emails[0], $emails[1], $emails[1]]);
 
     $c2 = $service->place($client, $in, $bordeaux);
     foreach (['accepte', 'en_preparation', 'en_cours_livraison'] as $s) {
@@ -150,7 +150,7 @@ try {
     $c4 = $service->place($client, $in, $bordeaux); // reste « en attente »
     $tous = $repo->search(['q' => 'emp.client'], 1);
     verifier('Recherche par e-mail : 4 commandes', $tous['total'], 4);
-    verifier('Actives avant les terminées et annulées', array_column($tous['lignes'], 'statut'), ['en_attente', 'terminee', 'terminee', 'annulee']);
+    verifier('Actives d\'abord, puis les terminées et annulées (plus récentes en premier)', array_column($tous['lignes'], 'statut'), ['en_attente', 'annulee', 'terminee', 'terminee']);
     verifier('Filtre par statut', $repo->search(['q' => 'emp.client', 'statut' => 'terminee'], 1)['total'], 2);
     verifier('Filtre statut sans résultat', $repo->search(['q' => 'emp.client', 'statut' => 'livre'], 1)['total'], 0);
     verifier('Recherche par nom', $repo->search(['q' => 'Durand', 'statut' => 'en_attente'], 1)['total'] >= 1, true);
