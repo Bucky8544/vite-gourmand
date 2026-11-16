@@ -5,7 +5,7 @@ Application web de présentation et de commande de menus (ECF Développeur Web e
 ## Stack
 
 - Front : HTML5, Bootstrap, JavaScript
-- Back : PHP 8.3 (PDO)
+- Back : PHP 8.4 (PDO)
 - Bases : MySQL 8 (relationnelle) et MongoDB 7 (statistiques)
 - Environnement : Docker, Mailpit (mails de test)
 - Déploiement : Heroku
@@ -45,6 +45,27 @@ docker compose down -v         # arrêter et supprimer les données
 ```
 
 Les fichiers `.sql` du dossier `sql/` sont exécutés automatiquement à la première création de la base MySQL.
+
+## Déploiement en ligne
+
+Site : https://vite-gourmand-demo26-7889b1062eec.herokuapp.com/
+
+- Application : Heroku (buildpack PHP, offre Eco, `Procfile` : `web: heroku-php-apache2 public/`).
+- MySQL : module JawsDB (variable `JAWSDB_URL`). MongoDB : Atlas (`MONGO_URI`, `MONGO_DB`). E-mails : Brevo (SMTP).
+- Variables de configuration Heroku : `JAWSDB_URL`, `MONGO_URI`, `MONGO_DB`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`,
+  `MAIL_FROM`, `MAIL_FROM_NAME`, `CONTACT_TO`, `APP_ENV=production`, `APP_DEBUG=0`, `APP_URL`, `APP_KEY`, `ROBOTS_NOINDEX`,
+  `SHOP_LON`, `SHOP_LAT`. Aucun secret n'est versionné.
+- Base MySQL : importer les fichiers de `sql/` dans l'ordre numérique, sauf `04_seed_users.sql` (comptes de développement,
+  jamais en production).
+- Après le premier déploiement :
+  `heroku run -a vite-gourmand-demo26 -- php scripts/init_mongo.php` puis `... -- php scripts/create_admin.php`
+  (et `... -- php scripts/resync_stats.php --oui` si besoin).
+- Limite connue : le disque de Heroku est éphémère (images téléversées perdues au redémarrage) et le dyno Eco se met en veille.
+
+## Documentation
+
+Le détail (architecture, modèle de données, diagrammes, sécurité, déploiement) est dans `docs/documentation-technique.pdf` ;
+l'utilisation du site est décrite dans `docs/manuel-utilisation.pdf`.
 
 ## Organisation Git
 
@@ -169,7 +190,8 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
   son stock, son délai de commande et sa galerie d'images (JPEG, PNG ou WebP, 2 Mo maximum, texte alternatif obligatoire).
 - `/employe/plats` : plats par type avec leurs allergènes ; un plat utilisé par un menu ne peut pas être supprimé.
 - `/employe/categories` : thèmes et régimes. `/employe/horaires` : horaires affichés dans le pied de page et appliqués à la livraison.
-- Les images téléversées sont stockées dans un volume Docker (`uploads`), hors du dépôt Git.
+- Les images téléversées sont stockées dans un volume Docker (`uploads`), hors du dépôt Git. En ligne, elles sont écrites sur le disque
+  du dyno Heroku, qui est éphémère : elles disparaissent à chaque redémarrage (limite connue, voir la documentation technique).
 
 ## Espace administrateur
 
@@ -177,7 +199,9 @@ Parcours : `/commande?menu=ID` (formulaire) puis récapitulatif détaillé, puis
   graphiques en barres accompagnés d'un tableau). Seules les commandes acceptées et non annulées comptent ; la période porte
   sur la date de la prestation ; le montant est le total payé, livraison comprise.
 - `/admin/employes` : création de comptes employés (e-mail et mot de passe ; le mail n'indique pas le mot de passe),
-  désactivation et réactivation. Aucun compte administrateur ne peut être créé depuis l'application.
+  désactivation et réactivation. Aucun compte administrateur ne peut être créé depuis l'application : il se crée par script
+  (`php scripts/create_admin.php`, mot de passe saisi de façon interactive). Un seul administrateur est prévu par défaut ;
+  l'option `--supplementaire` permet d'en créer un de plus volontairement.
 - Après une installation neuve ou une panne de MongoDB : `docker compose exec web php scripts/resync_stats.php --oui`
   ou le bouton « Reconstruire les statistiques ».
 - L'administrateur accède aussi à toutes les pages de l'espace employé.
