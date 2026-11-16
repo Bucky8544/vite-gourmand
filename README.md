@@ -53,7 +53,7 @@ Site : https://vite-gourmand-demo26-7889b1062eec.herokuapp.com/
 - Application : Heroku (buildpack PHP, offre Eco, `Procfile` : `web: heroku-php-apache2 public/`).
 - MySQL : module JawsDB (variable `JAWSDB_URL`). MongoDB : Atlas (`MONGO_URI`, `MONGO_DB`). E-mails : Brevo (SMTP).
 - Variables de configuration Heroku : `JAWSDB_URL`, `MONGO_URI`, `MONGO_DB`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`,
-  `MAIL_FROM`, `MAIL_FROM_NAME`, `CONTACT_TO`, `APP_ENV=production`, `APP_DEBUG=0`, `APP_URL`, `APP_KEY`, `ROBOTS_NOINDEX`,
+  `MAIL_FROM`, `MAIL_FROM_NAME`, `CONTACT_TO`, `APP_ENV=prod`, `APP_DEBUG=0`, `APP_URL`, `APP_KEY`, `ROBOTS_NOINDEX`,
   `SHOP_LON`, `SHOP_LAT`. Aucun secret n'est versionné.
 - Base MySQL : importer les fichiers de `sql/` dans l'ordre numérique, sauf `04_seed_users.sql` (comptes de développement,
   jamais en production).
