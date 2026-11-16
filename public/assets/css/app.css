@@ -188,22 +188,6 @@ h1, h2, h3 { font-family: var(--vg-font-titre); color: var(--vg-bordeaux); }
 .graph-fond { fill: var(--vg-sable); }
 .graph-barre { fill: var(--vg-bordeaux); }
 .kpi-valeur { font-family: var(--vg-font-titre); font-size: 1.75rem; font-weight: 700; color: var(--vg-bordeaux); }
-EOcat > templates/admin/_nav.php << 'EOF'
-<?php /* $actif : statistiques ou employes */ ?>
-<nav aria-label="Sections de l'espace administrateur" class="mb-4">
-    <ul class="list-inline mb-0">
-        <li class="list-inline-item mb-2">
-            <a class="btn <?= $actif === 'statistiques' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin"<?= $actif === 'statistiques' ? ' aria-current="page"' : '' ?>>Statistiques</a>
-        </li>
-        <li class="list-inline-item mb-2">
-            <a class="btn <?= $actif === 'employes' ? 'btn-primary' : 'btn-outline-primary' ?>" href="/admin/employes"<?= $actif === 'employes' ? ' aria-current="page"' : '' ?>>Comptes employés</a>
-        </li>
-        <li class="list-inline-item mb-2">
-            <a class="btn btn-outline-primary" href="/employe">Espace employé : commandes, avis, menus, horaires</a>
-        </li>
-    </ul>
-</nav>
-
 /* ---------- Contact et pages légales ---------- */
 .champ-piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .legal h2 { margin-top: 2rem; }
@@ -214,3 +198,28 @@ EOcat > templates/admin/_nav.php << 'EOF'
 
 /* Fin contour autour des illustrations de la section équipe */
 .avatar { box-shadow: 0 0 0 1px #D8C7A3; }
+
+/* ---------- RGAA : focus visible, contrastes des composants et erreurs ---------- */
+/* Bootstrap retire le contour natif et le remplace par une ombre bleue très pâle (contraste ~1,2:1). */
+:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+.navbar-brand:focus-visible,
+.navbar-toggler:focus-visible,
+.page-link:focus,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus,
+.btn-check:focus-visible + .btn {
+  outline: 3px solid var(--vg-bordeaux);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.form-control:focus, .form-select:focus { border-color: var(--vg-bordeaux); }
+.site-footer :focus-visible, .skip-link:focus-visible { outline-color: var(--vg-creme); }
+
+/* Cases à cocher et boutons radio : bordure assez contrastée (3:1 minimum). */
+.form-check-input { border-color: var(--vg-gris); }
+
+/* Messages d'erreur : le rouge Bootstrap (#dc3545) n'atteint pas 4,5:1 sur la crème. */
+:root { --bs-form-invalid-color: var(--vg-erreur); --bs-form-invalid-border-color: var(--vg-erreur); }
