@@ -20,7 +20,7 @@ return [
 
     'hebergeur_nom' => 'Heroku (Salesforce, Inc.) pour l\'application et la base MySQL (JawsDB) ; MongoDB Atlas (MongoDB, Inc.) pour la base des statistiques',
     'hebergeur_adresse' => 'Salesforce, Inc., 415 Mission Street, 3rd Floor, San Francisco, CA 94105, États-Unis ; MongoDB, Inc., 1633 Broadway, 38th Floor, New York, NY 10019, États-Unis',
-    'hebergeur_pays' => 'application et base MySQL : git branch --show-current ; base MongoDB : git status --short',
+    'hebergeur_pays' => 'application et base MySQL : Europe (région Heroku eu) ; base MongoDB : France (AWS Paris, eu-west-3)',
 
     'mediateur' => 'À renseigner : médiateur de la consommation choisi par l\'entreprise (nom, adresse postale et site internet)',
     'paiement' => 'Les modalités de paiement sont communiquées par l\'entreprise lors de la confirmation de la commande.',
