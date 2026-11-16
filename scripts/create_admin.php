@@ -4,6 +4,7 @@ declare(strict_types=1);
 // Crée le compte administrateur (le seul compte qui ne peut pas être créé depuis l'application).
 //   php scripts/create_admin.php admin@exemple.fr                  -> création
 //   php scripts/create_admin.php admin@exemple.fr --reinitialiser  -> nouveau mot de passe de cet administrateur
+//   php scripts/create_admin.php second@exemple.fr --supplementaire -> ajoute volontairement un administrateur de plus
 // Le mot de passe est saisi de façon invisible, ou lu dans la variable d'environnement ADMIN_PASSWORD.
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -11,6 +12,7 @@ use App\Core\Database;
 use App\Validation\PasswordPolicy;
 
 $reinitialiser = in_array('--reinitialiser', $argv, true);
+$supplementaire = in_array('--supplementaire', $argv, true);
 $args = array_values(array_filter(array_slice($argv, 1), static fn (string $a): bool => !str_starts_with($a, '--')));
 $email = mb_strtolower(trim($args[0] ?? (string) getenv('ADMIN_EMAIL')));
 
@@ -34,8 +36,8 @@ if ($compte && !$reinitialiser) {
     fwrite(STDERR, "Cet administrateur existe déjà. Ajoutez --reinitialiser pour changer son mot de passe.\n");
     exit(1);
 }
-if (!$compte && $admins !== []) {
-    fwrite(STDERR, 'Un administrateur existe déjà (' . implode(', ', $admins) . "). Un seul compte administrateur est prévu.\n");
+if (!$compte && $admins !== [] && !$supplementaire) {
+    fwrite(STDERR, 'Un administrateur existe déjà (' . implode(', ', $admins) . "). Un seul compte administrateur est prévu par défaut : ajoutez --supplementaire pour en créer un de plus volontairement.\n");
     exit(1);
 }
 
