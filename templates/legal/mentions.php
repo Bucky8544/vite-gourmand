@@ -14,7 +14,7 @@
         <p><?= $e('directeur') ?>.</p>
 
         <h2 class="h4">Conception et réalisation</h2>
-        <p>Site conçu et développé par FastDev pour <?= $e('nom') ?>.</p>
+        <p>Site conçu et développé dans le cadre de <?= $e('concepteur') ?>, pour <?= $e('nom') ?>.</p>
 
         <h2 class="h4">Hébergement</h2>
         <p><?= $e('hebergeur_nom') ?><br>
