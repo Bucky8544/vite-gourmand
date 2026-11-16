@@ -26,7 +26,7 @@ administrateur). Les contraintes techniques qui en découlent :
   disproportionnée pour ce périmètre.
 - **Limites** : le JavaScript natif demande de la discipline pour rester organisé.
 
-### Back-end : PHP 8.3 avec PDO
+### Back-end : PHP 8.4 avec PDO
 - **Pourquoi** : langage adapté au web, hébergement simple, exemple proposé par le sujet.
   PDO permet d'écrire des requêtes préparées, qui protègent contre l'injection SQL.
 - **Alternatives** : Symfony ou Laravel (sécurité et ORM intégrés, mais courbe d'apprentissage
@@ -62,15 +62,16 @@ administrateur). Les contraintes techniques qui en découlent :
 - Dépôt GitHub public, branches `main`, `develop` et `feature/*`.
 - Trello (Kanban) pour le backlog, les sprints et le suivi.
 
-### Déploiement : à confirmer
-- **Piste envisagée** : Heroku (déploiement par conteneur Docker ou buildpack PHP), avec un
-  add-on MySQL et MongoDB Atlas (palier gratuit).
-- **Points de vigilance** : Heroku est payant, ne fournit ni SMTP ni stockage de fichiers
-  persistant (images à héberger ailleurs), et les applications d'un plan d'entrée peuvent se
-  mettre en veille après inactivité.
-- **Alternatives étudiées** : fly.io (pas de MySQL managé disponible : la base serait à
-  administrer soi-même), autre hébergeur avec MySQL managé.
-- Le choix définitif sera consigné dans la documentation de déploiement.
+### Déploiement : Heroku (retenu)
+- **Choix** : Heroku avec le buildpack PHP (offre Eco), le module JawsDB pour MySQL, MongoDB Atlas (palier gratuit)
+  pour les statistiques et Brevo pour l'envoi des e-mails (SMTP).
+- **Pourquoi** : déploiement direct depuis Git, MySQL managé disponible, HTTPS fourni, configuration par variables
+  d'environnement (aucun secret dans le dépôt).
+- **Limites assumées** : le disque est éphémère (les images téléversées depuis l'application ne survivent pas à un
+  redémarrage), le dyno Eco se met en veille après inactivité, et l'envoi d'e-mails passe par un service externe.
+- **Alternatives étudiées** : fly.io (pas de MySQL managé : la base serait à administrer soi-même), autre hébergeur
+  avec MySQL managé.
+- La procédure complète figure dans `docs/documentation-technique.pdf` et dans le README.
 
 ## 3. Sécurité : principes retenus
 
@@ -89,7 +90,8 @@ administrateur). Les contraintes techniques qui en découlent :
 - collecte limitée aux données nécessaires, consentement à l'inscription, politique de
   confidentialité, droit d'accès et de suppression ;
 - HTML sémantique, textes alternatifs sur les images (champ dédié en base), labels sur les
-  formulaires, navigation au clavier, contrastes vérifiés (Lighthouse, WAVE).
+  formulaires, navigation au clavier, contrastes vérifiés par calcul du rapport de contraste (WCAG), audit RGAA et limites consignés dans la
+  déclaration d'accessibilité (`/accessibilite`).
 
 ## 5. Conclusion
 
