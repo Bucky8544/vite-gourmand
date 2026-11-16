@@ -37,7 +37,7 @@
                         <td>Intérêt légitime à répondre aux demandes reçues</td>
                     </tr>
                     <tr>
-                        <th scope="row">Données techniques : cookie de session, journaux du serveur</th>
+                        <th scope="row">Données techniques : cookie de session, journaux du serveur, empreinte chiffrée de l'adresse IP et de l'e-mail utilisés pour limiter les tentatives de connexion et d'inscription (supprimée au bout de 24 heures)</th>
                         <td>Assurer le fonctionnement et la sécurité du site</td>
                         <td>Intérêt légitime (sécurité)</td>
                     </tr>
@@ -49,7 +49,7 @@
         <h2 class="h4">Destinataires</h2>
         <p>Vos données sont accessibles aux seules personnes habilitées de l'entreprise (équipe et administrateur), pour traiter vos commandes. Elles ne sont ni vendues ni cédées. Nous faisons appel à des prestataires, uniquement pour fournir le service :</p>
         <ul>
-            <li><strong>L'hébergeur du site</strong> (<?= $e('hebergeur_nom') ?>) : hébergement des données. Pays d'hébergement : <?= $e('hebergeur_pays') ?>.</li>
+            <li><strong>Les hébergeurs du site</strong> (<?= $e('hebergeur_nom') ?>) : hébergement des données. Pays d'hébergement : <?= $e('hebergeur_pays') ?>.</li>
             <li><strong><?= $e('smtp_nom') ?></strong> : envoi des e-mails (confirmation de compte, de commande, changements d'état).</li>
             <li><strong>Le service public de géolocalisation de l'IGN (Géoplateforme)</strong> : l'adresse de la prestation lui est transmise pour calculer la distance de livraison et les frais correspondants. Ce service n'exige ni compte ni identifiant.</li>
         </ul>
